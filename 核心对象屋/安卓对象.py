@@ -106,9 +106,6 @@ class 安卓指令类:
             return 输出[-1] - self.__刘海高度, 输出[-2]
 
     def 裁剪图片(self, 范围=(0, 0, -1, -1), 完整相对路径='垃圾堆放屋/临时', 是否保存=True):
-        # 命令 = self.__安卓调试桥路径 + "shell screencap -p"
-        # 输出 = self.__执行命令(命令).replace(b'\r\n', b'\n')
-
         # 将图片转换成opencv专用的格式后，在转成opencv的格式不过这个图片是BGR的顺序的。
         # 现在是多次一举的。暂时注释，后期可能删除。
         # 图片 = cv.imdecode(np.asarray(bytearray(输出), dtype=np.uint8), cv.IMREAD_COLOR)
