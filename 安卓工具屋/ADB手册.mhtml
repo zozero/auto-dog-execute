@@ -1,0 +1,1196 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md
+Subject: ADB(1) MAN PAGE
+Date: Sat, 16 Mar 2024 10:20:52 +0800
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb----"
+
+
+------MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb----
+Content-Type: text/html
+Content-ID: <frame-637385EF66936D0655B83010FD0D2DEC@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md
+
+<!DOCTYPE html><html lang=3D"en"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><meta name=3D"viewport" content=3D"wid=
+th=3Ddevice-width, initial-scale=3D1"><title>ADB(1) MAN PAGE</title><link r=
+el=3D"stylesheet" type=3D"text/css" href=3D"https://android.googlesource.co=
+m/+static/base.css"><link rel=3D"stylesheet" type=3D"text/css" href=3D"http=
+s://android.googlesource.com/+static/doc.css"><link rel=3D"stylesheet" type=
+=3D"text/css" href=3D"https://android.googlesource.com/+static/prettify/pre=
+ttify.css"><!-- default customHeadTagPart --></head><body class=3D"Site"><h=
+eader class=3D"Site-header "><div class=3D"Header"><div class=3D"Header-tit=
+le"></div></div></header><div class=3D"Site-content Site-Content--markdown"=
+><div class=3D"Container"><div class=3D"doc"><h1><a class=3D"h" name=3D"ADB=
+_1_MAN-PAGE" href=3D"https://android.googlesource.com/platform/packages/mod=
+ules/adb/+/refs/heads/main/docs/user/adb.1.md#ADB_1_MAN-PAGE"><span></span>=
+</a><a class=3D"h" name=3D"adb_1_man-page" href=3D"https://android.googleso=
+urce.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md=
+#adb_1_man-page"><span></span></a>ADB(1) MAN PAGE</h1><h1><a class=3D"h" na=
+me=3D"VERSION" href=3D"https://android.googlesource.com/platform/packages/m=
+odules/adb/+/refs/heads/main/docs/user/adb.1.md#VERSION"><span></span></a><=
+a class=3D"h" name=3D"version" href=3D"https://android.googlesource.com/pla=
+tform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#version"><s=
+pan></span></a>VERSION</h1><p>1.0.41</p><h1><a class=3D"h" name=3D"NAME" hr=
+ef=3D"https://android.googlesource.com/platform/packages/modules/adb/+/refs=
+/heads/main/docs/user/adb.1.md#NAME"><span></span></a><a class=3D"h" name=
+=3D"name" href=3D"https://android.googlesource.com/platform/packages/module=
+s/adb/+/refs/heads/main/docs/user/adb.1.md#name"><span></span></a>NAME</h1>=
+<p><strong>adb</strong> &nbsp;&nbsp;&nbsp;&nbsp;CLI Client for ADB (Android=
+ Debug Bridge) Server.</p><h1><a class=3D"h" name=3D"SYNOPSIS" href=3D"http=
+s://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/mai=
+n/docs/user/adb.1.md#SYNOPSIS"><span></span></a><a class=3D"h" name=3D"syno=
+psis" href=3D"https://android.googlesource.com/platform/packages/modules/ad=
+b/+/refs/heads/main/docs/user/adb.1.md#synopsis"><span></span></a>SYNOPSIS<=
+/h1><p><strong>adb</strong> [<em>GLOBAL_OPTIONS</em>] command [<em>COMMAND_=
+OPTIONS</em>]</p><h1><a class=3D"h" name=3D"DESCRIPTION" href=3D"https://an=
+droid.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs=
+/user/adb.1.md#DESCRIPTION"><span></span></a><a class=3D"h" name=3D"descrip=
+tion" href=3D"https://android.googlesource.com/platform/packages/modules/ad=
+b/+/refs/heads/main/docs/user/adb.1.md#description"><span></span></a>DESCRI=
+PTION</h1><p>Connects to the ADB Server via its smart socket interface. All=
+ows sending requests, receives responses and manages lifecycle of the adb s=
+erver.</p><p>Tasks are performed via commands. Some commands are fulfilled =
+directly by the server while others are "forwarded over to the adbd(ADB dae=
+mon) running on the device.</p><h1><a class=3D"h" name=3D"GLOBAL-OPTIONS" h=
+ref=3D"https://android.googlesource.com/platform/packages/modules/adb/+/ref=
+s/heads/main/docs/user/adb.1.md#GLOBAL-OPTIONS"><span></span></a><a class=
+=3D"h" name=3D"global-options" href=3D"https://android.googlesource.com/pla=
+tform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#global-opti=
+ons"><span></span></a>GLOBAL OPTIONS:</h1><p><strong>-a</strong> &nbsp;&nbs=
+p;&nbsp;&nbsp;Listen on all network interfaces, not just localhost.</p><p><=
+strong>-d</strong> &nbsp;&nbsp;&nbsp;&nbsp;Use USB device (error if multipl=
+e devices connected).</p><p><strong>-e</strong> &nbsp;&nbsp;&nbsp;&nbsp;Use=
+ TCP/IP device (error if multiple TCP/IP devices available).</p><p><strong>=
+-s</strong> <strong>SERIAL</strong> &nbsp;&nbsp;&nbsp;&nbsp;Use device with=
+ given <strong>SERIAL</strong> (overrides $ANDROID_SERIAL).</p><p><strong>-=
+t</strong> <strong>ID</strong> &nbsp;&nbsp;&nbsp;&nbsp;Use device with give=
+n transport <strong>ID</strong>.</p><p><strong>-H</strong> &nbsp;&nbsp;&nbs=
+p;&nbsp;Name of adb server host [default=3Dlocalhost].</p><p><strong>-P</st=
+rong> *<em>PORT</em> &nbsp;&nbsp;&nbsp;&nbsp;Smart socket <strong>PORT</str=
+ong> of adb server [default=3D5037].</p><p><strong>-L</strong> <strong>SOCK=
+ET</strong> &nbsp;&nbsp;&nbsp;&nbsp;Listen on given socket for adb server [=
+default=3Dtcp:localhost:5037].</p><p><strong>--one-device</strong> <strong>=
+SERIAL</strong>|<strong>USB</strong> &nbsp;&nbsp;&nbsp;&nbsp;Server will on=
+ly connect to one USB device, specified by a <strong>SERIAL</strong> number=
+ or <strong>USB</strong> device address (only with =E2=80=98start-server=E2=
+=80=99 or =E2=80=98server nodaemon=E2=80=99).</p><p><strong>--exit-on-write=
+-error</strong> &nbsp;&nbsp;&nbsp;&nbsp;Exit if stdout is closed.</p><h1><a=
+ class=3D"h" name=3D"GENERAL-COMMANDS" href=3D"https://android.googlesource=
+.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#GEN=
+ERAL-COMMANDS"><span></span></a><a class=3D"h" name=3D"general-commands" hr=
+ef=3D"https://android.googlesource.com/platform/packages/modules/adb/+/refs=
+/heads/main/docs/user/adb.1.md#general-commands"><span></span></a>GENERAL C=
+OMMANDS:</h1><p>devices [<strong>-l</strong>] &nbsp;&nbsp;&nbsp;&nbsp;List =
+connected devices.</p><p><strong>-l</strong> &nbsp;&nbsp;&nbsp;&nbsp;Use lo=
+ng output.</p><p>help &nbsp;&nbsp;&nbsp;&nbsp;Show this help message.</p><p=
+>version &nbsp;&nbsp;&nbsp;&nbsp;Show version number.</p><h1><a class=3D"h"=
+ name=3D"NETWORKING" href=3D"https://android.googlesource.com/platform/pack=
+ages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#NETWORKING"><span></s=
+pan></a><a class=3D"h" name=3D"networking" href=3D"https://android.googleso=
+urce.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md=
+#networking"><span></span></a>NETWORKING</h1><p>connect <strong>HOST</stron=
+g>[:<strong>PORT</strong>] &nbsp;&nbsp;&nbsp;&nbsp;Connect to a device via =
+TCP/IP [default <strong>PORT</strong>=3D5555].</p><p>disconnect [<strong>HO=
+ST</strong>[:<strong>PORT</strong>]] &nbsp;&nbsp;&nbsp;&nbsp;Disconnect fro=
+m given TCP/IP device [default <strong>PORT</strong>=3D5555], or all.</p><p=
+>pair <strong>HOST</strong>[:<strong>PORT</strong>] [<strong>PAIRING_CODE</=
+strong>] &nbsp;&nbsp;&nbsp;&nbsp;Pair with a device for secure TCP/IP commu=
+nication.</p><p>forward <strong>--list</strong> | [<strong>--no-rebind</str=
+ong>] <strong>LOCAL_REMOTE</strong> | <strong>--remove</strong> <strong>LOC=
+AL</strong> | <strong>--remove-all</strong></p><p><strong>--list</strong> &=
+nbsp;&nbsp;&nbsp;&nbsp;List all forward socket connections.</p><p>[<strong>=
+--no-rebind</strong>] <strong>LOCAL_REMOTE</strong> &nbsp;&nbsp;&nbsp;&nbsp=
+;Forward socket connection using one of the followings.</p><p>&nbsp;&nbsp;&=
+nbsp;&nbsp;<strong>tcp</strong>:<strong>PORT</strong> (local may be =E2=80=
+=9Ctcp:0=E2=80=9D to pick any open port. &nbsp;&nbsp;&nbsp;&nbsp;<strong>lo=
+calreserved</strong>:<strong>UNIX_DOMAIN_SOCKET_NAME</strong>. &nbsp;&nbsp;=
+&nbsp;&nbsp;<strong>localfilesystem</strong>:<strong>UNIX_DOMAIN_SOCKET_NAM=
+E</strong>. &nbsp;&nbsp;&nbsp;&nbsp;<strong>jdwp</strong>:<strong>PROCESS P=
+ID</strong> (remote only). &nbsp;&nbsp;&nbsp;&nbsp;<strong>vsock</strong>:<=
+strong>CID</strong>:<strong>PORT</strong> (remote only). &nbsp;&nbsp;&nbsp;=
+&nbsp;<strong>acceptfd</strong>:<strong>FD</strong> (listen only).</p><p><s=
+trong>--remove</strong> <strong>LOCAL</strong> &nbsp;&nbsp;&nbsp;&nbsp;Remo=
+ve specific forward socket connection.</p><p><strong>--remove-all</strong> =
+&nbsp;&nbsp;&nbsp;&nbsp;Remove all forward socket connections.</p><p>revers=
+e <strong>--list</strong> | [<strong>--no-rebind</strong>] <strong>REMOTE</=
+strong> <strong>LOCAL</strong> | <strong>--remove</strong> <strong>REMOTE</=
+strong> | <strong>--remove-all</strong></p><p><strong>--list</strong> &nbsp=
+;&nbsp;&nbsp;&nbsp;List all reverse socket connections from device.</p><p>[=
+<strong>--no-rebind</strong>] <strong>REMOTE</strong> <strong>LOCAL</strong=
+> &nbsp;&nbsp;&nbsp;&nbsp;Reverse socket connection using one of the follow=
+ing.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;tcp:<strong>PORT</strong> (<strong>REMOT=
+E</strong> may be =E2=80=9Ctcp:0=E2=80=9D to pick any open port). &nbsp;&nb=
+sp;&nbsp;&nbsp;localabstract:<strong>UNIX_DOMAIN_SOCKET_NAME</strong>. &nbs=
+p;&nbsp;&nbsp;&nbsp;localreserved:<strong>UNIX_DOMAIN_SOCKET_NAME</strong>.=
+ &nbsp;&nbsp;&nbsp;&nbsp;localfilesystem:<strong>UNIX_DOMAIN_SOCKET_NAME</s=
+trong>.</p><p><strong>--remove</strong> <strong>REMOTE</strong> &nbsp;&nbsp=
+;&nbsp;&nbsp;Remove specific reverse socket connection.</p><p><strong>--rem=
+ove-all</strong> &nbsp;&nbsp;&nbsp;&nbsp;Remove all reverse socket connecti=
+ons from device.</p><p>mdns <strong>check</strong> | <strong>services</stro=
+ng> &nbsp;&nbsp;&nbsp;&nbsp;Perform mDNS subcommands.</p><p><strong>check</=
+strong> &nbsp;&nbsp;&nbsp;&nbsp;Check if mdns discovery is available.</p><p=
+><strong>services</strong> &nbsp;&nbsp;&nbsp;&nbsp;List all discovered serv=
+ices.</p><h1><a class=3D"h" name=3D"FILE-TRANSFER" href=3D"https://android.=
+googlesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/=
+adb.1.md#FILE-TRANSFER"><span></span></a><a class=3D"h" name=3D"file-transf=
+er" href=3D"https://android.googlesource.com/platform/packages/modules/adb/=
++/refs/heads/main/docs/user/adb.1.md#file-transfer"><span></span></a>FILE T=
+RANSFER:</h1><p>push [<strong>--sync</strong>] [<strong>-z</strong> <strong=
+>ALGORITHM</strong>] [<strong>-Z</strong>] <strong>LOCAL</strong>... <stron=
+g>REMOTE</strong> &nbsp;&nbsp;&nbsp;&nbsp;Copy local files/directories to d=
+evice.</p><p><strong>--sync</strong> &nbsp;&nbsp;&nbsp;&nbsp;Only push file=
+s that are newer on the host than the device.</p><p><strong>-n</strong> &nb=
+sp;&nbsp;&nbsp;&nbsp;Dry run, push files to device without storing to the f=
+ilesystem.</p><p><strong>-z</strong> &nbsp;&nbsp;&nbsp;&nbsp;enable compres=
+sion with a specified algorithm (any/none/brotli/lz4/zstd).</p><p><strong>-=
+Z</strong> &nbsp;&nbsp;&nbsp;&nbsp;Disable compression.</p><p>pull [<strong=
+>-a</strong>] [<strong>-z</strong> <strong>ALGORITHM</strong>] [<strong>-Z<=
+/strong>] <strong>REMOTE</strong>... <strong>LOCAL</strong> &nbsp;&nbsp;&nb=
+sp;&nbsp;Copy files/dirs from device</p><p><strong>-a</strong> &nbsp;&nbsp;=
+&nbsp;&nbsp;preserve file timestamp and mode.</p><p><strong>-z</strong> &nb=
+sp;&nbsp;&nbsp;&nbsp;enable compression with a specified algorithm (<strong=
+>any</strong>/<strong>none</strong>/<strong>brotli</strong>/<strong>lz4</st=
+rong>/<strong>zstd</strong>)</p><p><strong>-Z</strong> &nbsp;&nbsp;&nbsp;&n=
+bsp;disable compression</p><p>sync [<strong>-l</strong>] [<strong>-z</stron=
+g> <strong>ALGORITHM</strong>] [<strong>-Z</strong>] [<strong>all</strong>|=
+<strong>data</strong>|<strong>odm</strong>|<strong>oem</strong>|<strong>pro=
+duct</strong>|<strong>system</strong>|<strong>system_ext</strong>|<strong>v=
+endor</strong>] &nbsp;&nbsp;&nbsp;&nbsp;Sync a local build from $ANDROID_PR=
+ODUCT_OUT to the device (default all)</p><p><strong>-n</strong> &nbsp;&nbsp=
+;&nbsp;&nbsp;Dry run. Push files to device without storing to the filesyste=
+m.</p><p><strong>-l</strong> &nbsp;&nbsp;&nbsp;&nbsp;List files that would =
+be copied, but don't copy them.</p><p><strong>-z</strong> Enable compressio=
+n with a specified algorithm (<strong>any</strong>/<strong>none</strong>/<s=
+trong>brotli</strong>/<strong>lz4</strong>/<strong>zstd</strong>)</p><p><st=
+rong>-Z</strong> Disable compression.</p><h1><a class=3D"h" name=3D"SHELL" =
+href=3D"https://android.googlesource.com/platform/packages/modules/adb/+/re=
+fs/heads/main/docs/user/adb.1.md#SHELL"><span></span></a><a class=3D"h" nam=
+e=3D"shell" href=3D"https://android.googlesource.com/platform/packages/modu=
+les/adb/+/refs/heads/main/docs/user/adb.1.md#shell"><span></span></a>SHELL:=
+</h1><p>shell [<strong>-e</strong> <strong>ESCAPE</strong>] [<strong>-n</st=
+rong>] [<strong>-Tt</strong>] [<strong>-x</strong>] [<strong>COMMAND</stron=
+g>...] &nbsp;&nbsp;&nbsp;&nbsp;Run remote shell command (interactive shell =
+if no command given).</p><p><strong>-e</strong> &nbsp;&nbsp;&nbsp;&nbsp;Cho=
+ose escape character, or =E2=80=9C<strong>none</strong>=E2=80=9D; default =
+=E2=80=98<strong>~</strong>=E2=80=99.</p><p><strong>-n</strong> &nbsp;&nbsp=
+;&nbsp;&nbsp;Don't read from stdin.</p><p><strong>-T</strong>: &nbsp;&nbsp;=
+&nbsp;&nbsp;Disable pty allocation.</p><p><strong>-t</strong>: &nbsp;&nbsp;=
+&nbsp;&nbsp;Allocate a pty if on a tty (-tt: force pty allocation).</p><p><=
+strong>-x</strong> &nbsp;&nbsp;&nbsp;&nbsp;Disable remote exit codes and st=
+dout/stderr separation.</p><p>emu <strong>COMMAND</strong> &nbsp;&nbsp;&nbs=
+p;&nbsp;Run emulator console <strong>COMMAND</strong></p><h1><a class=3D"h"=
+ name=3D"APP-INSTALLATION" href=3D"https://android.googlesource.com/platfor=
+m/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#APP-INSTALLATIO=
+N"><span></span></a><a class=3D"h" name=3D"app-installation" href=3D"https:=
+//android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/=
+docs/user/adb.1.md#app-installation"><span></span></a>APP INSTALLATION</h1>=
+<p>(see also <code class=3D"code">adb shell cmd package help</code>):</p><p=
+>install [<strong>-lrtsdg</strong>] [<strong>--instant</strong>] <strong>PA=
+CKAGE</strong> &nbsp;&nbsp;&nbsp;&nbsp;Push a single package to the device =
+and install it</p><p>install-multiple [<strong>-lrtsdpg</strong>] [<strong>=
+--instant</strong>] <strong>PACKAGE</strong>... &nbsp;&nbsp;&nbsp;&nbsp;Pus=
+h multiple APKs to the device for a single package and install them</p><p>i=
+nstall-multi-package [<strong>-lrtsdpg</strong>] [<strong>--instant</strong=
+>] <strong>PACKAGE</strong>... &nbsp;&nbsp;&nbsp;&nbsp;Push one or more pac=
+kages to the device and install them atomically</p><p><strong>-r</strong>: =
+&nbsp;&nbsp;&nbsp;&nbsp;Replace existing application.</p><p><strong>-t</str=
+ong> &nbsp;&nbsp;&nbsp;&nbsp;Allow test packages.</p><p><strong>-d</strong>=
+ &nbsp;&nbsp;&nbsp;&nbsp;Allow version code downgrade (debuggable packages =
+only).</p><p><strong>-p</strong> &nbsp;&nbsp;&nbsp;&nbsp;Partial applicatio=
+n install (install-multiple only).</p><p><strong>-g</strong> &nbsp;&nbsp;&n=
+bsp;&nbsp;Grant all runtime permissions.</p><p><strong>--abi</strong> <stro=
+ng>ABI</strong> &nbsp;&nbsp;&nbsp;&nbsp;Override platform's default ABI.</p=
+><p><strong>--instant</strong> &nbsp;&nbsp;&nbsp;&nbsp;Cause the app to be =
+installed as an ephemeral install app.</p><p><strong>--no-streaming</strong=
+> &nbsp;&nbsp;&nbsp;&nbsp;Always push APK to device and invoke Package Mana=
+ger as separate steps.</p><p><strong>--streaming</strong> &nbsp;&nbsp;&nbsp=
+;&nbsp;Force streaming APK directly into Package Manager.</p><p><strong>--f=
+astdeploy</strong> &nbsp;&nbsp;&nbsp;&nbsp;Use fast deploy.</p><p><strong>-=
+no-fastdeploy</strong> &nbsp;&nbsp;&nbsp;&nbsp;Prevent use of fast deploy.<=
+/p><p><strong>-force-agent</strong> &nbsp;&nbsp;&nbsp;&nbsp;Force update of=
+ deployment agent when using fast deploy.</p><p><strong>-date-check-agent</=
+strong> &nbsp;&nbsp;&nbsp;&nbsp;Update deployment agent when local version =
+is newer and using fast deploy.</p><p><strong>--version-check-agent</strong=
+> &nbsp;&nbsp;&nbsp;&nbsp;Update deployment agent when local version has di=
+fferent version code and using fast deploy.</p><p><strong>--local-agent</st=
+rong> &nbsp;&nbsp;&nbsp;&nbsp;Locate agent files from local source build (i=
+nstead of SDK location). See also <code class=3D"code">adb shell pm help</c=
+ode> for more options.</p><p>uninstall [<strong>-k</strong>] <strong>APPLIC=
+ATION_ID</strong> &nbsp;&nbsp;&nbsp;&nbsp;Remove this <strong>APPLICATION_I=
+D</strong> from the device.</p><p><strong>-k</strong> &nbsp;&nbsp;&nbsp;&nb=
+sp;Keep the data and cache directories.</p><h1><a class=3D"h" name=3D"DEBUG=
+GING" href=3D"https://android.googlesource.com/platform/packages/modules/ad=
+b/+/refs/heads/main/docs/user/adb.1.md#DEBUGGING"><span></span></a><a class=
+=3D"h" name=3D"debugging" href=3D"https://android.googlesource.com/platform=
+/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#debugging"><span=
+></span></a>DEBUGGING:</h1><p>bugreport [<strong>PATH</strong>] &nbsp;&nbsp=
+;&nbsp;&nbsp;Write bugreport to given PATH [default=3Dbugreport.zip]; if <s=
+trong>PATH</strong> is a directory, the bug report is saved in that directo=
+ry. devices that don't support zipped bug reports output to stdout.</p><p>j=
+dwp &nbsp;&nbsp;&nbsp;&nbsp;List pids of processes hosting a JDWP transport=
+.</p><p>logcat &nbsp;&nbsp;&nbsp;&nbsp;Show device log (logcat --help for m=
+ore).</p><h1><a class=3D"h" name=3D"SECURITY" href=3D"https://android.googl=
+esource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1=
+.md#SECURITY"><span></span></a><a class=3D"h" name=3D"security" href=3D"htt=
+ps://android.googlesource.com/platform/packages/modules/adb/+/refs/heads/ma=
+in/docs/user/adb.1.md#security"><span></span></a>SECURITY:</h1><p>disable-v=
+erity &nbsp;&nbsp;&nbsp;&nbsp;Disable dm-verity checking on userdebug build=
+s.</p><p>enable-verity &nbsp;&nbsp;&nbsp;&nbsp;Re-enable dm-verity checking=
+ on userdebug builds.</p><p>keygen <strong>FILE</strong> &nbsp;&nbsp;&nbsp;=
+&nbsp;Generate adb public/private key; private key stored in <strong>FILE</=
+strong>.</p><h1><a class=3D"h" name=3D"SCRIPTING" href=3D"https://android.g=
+ooglesource.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/a=
+db.1.md#SCRIPTING"><span></span></a><a class=3D"h" name=3D"scripting" href=
+=3D"https://android.googlesource.com/platform/packages/modules/adb/+/refs/h=
+eads/main/docs/user/adb.1.md#scripting"><span></span></a>SCRIPTING:</h1><p>=
+wait-for [-<strong>TRANSPORT</strong>] -<strong>STATE</strong>... &nbsp;&nb=
+sp;&nbsp;&nbsp; Wait for device to be in a given state.</p><p>&nbsp;&nbsp;&=
+nbsp;&nbsp;<strong>STATE</strong>: device, recovery, rescue, sideload, boot=
+loader, or disconnect. &nbsp;&nbsp;&nbsp;&nbsp;<strong>TRANSPORT</strong>: =
+<strong>usb</strong>, <strong>local</strong>, or <strong>any</strong> [defa=
+ult=3D<strong>any</strong>].</p><p>get-state &nbsp;&nbsp;&nbsp;&nbsp;Print =
+offline | bootloader | device.</p><p>get-serialno &nbsp;&nbsp;&nbsp;&nbsp;P=
+rint <strong>SERIAL_NUMBER</strong>.</p><p>get-devpath &nbsp;&nbsp;&nbsp;&n=
+bsp;Print  <strong>DEVICE_PATH</strong>.</p><p>remount [<strong>-R</strong>=
+] &nbsp;&nbsp;&nbsp;&nbsp;Remount partitions read-write.</p><p><strong>-R</=
+strong> &nbsp;&nbsp;&nbsp;&nbsp;Automatically reboot the device.</p><p>rebo=
+ot [<strong>bootloader</strong>|<strong>recovery</strong>|<strong>sideload<=
+/strong>|<strong>sideload-auto-reboot</strong>] &nbsp;&nbsp;&nbsp;&nbsp;Reb=
+oot the device; defaults to booting system image but supports <strong>bootl=
+oader</strong> and <strong>recovery</strong> too.</p><p><strong>sideload</s=
+trong> &nbsp;&nbsp;&nbsp;&nbsp;Reboots into recovery and automatically star=
+ts sideload mode.</p><p><strong>sideload-auto-reboot</strong> &nbsp;&nbsp;&=
+nbsp;&nbsp;Same as <strong>sideload</strong> but reboots after sideloading.=
+</p><p>sideload <strong>OTAPACKAGE</strong> &nbsp;&nbsp;&nbsp;&nbsp;Sideloa=
+d the given full OTA package <strong>OTAPACKAGE</strong>.</p><p>root &nbsp;=
+&nbsp;&nbsp;&nbsp;Restart adbd with root permissions.</p><p>unroot &nbsp;&n=
+bsp;&nbsp;&nbsp;Restart adbd without root permissions.</p><p>usb &nbsp;&nbs=
+p;&nbsp;&nbsp;Restart adbd listening on USB.</p><p>tcpip <strong>PORT</stro=
+ng> &nbsp;&nbsp;&nbsp;&nbsp;Restart adbd listening on TCP on <strong>PORT</=
+strong>.</p><h1><a class=3D"h" name=3D"INTERNAL-DEBUGGING" href=3D"https://=
+android.googlesource.com/platform/packages/modules/adb/+/refs/heads/main/do=
+cs/user/adb.1.md#INTERNAL-DEBUGGING"><span></span></a><a class=3D"h" name=
+=3D"internal-debugging" href=3D"https://android.googlesource.com/platform/p=
+ackages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#internal-debugging=
+"><span></span></a>INTERNAL DEBUGGING:</h1><p>start-server &nbsp;&nbsp;&nbs=
+p;&nbsp;Ensure that there is a server running.</p><p>kill-server &nbsp;&nbs=
+p;&nbsp;&nbsp;Kill the server if it is running.</p><p>reconnect &nbsp;&nbsp=
+;&nbsp;&nbsp;Close connection from host side to force reconnect.</p><p>reco=
+nnect device &nbsp;&nbsp;&nbsp;&nbsp;Close connection from device side to f=
+orce reconnect.</p><p>reconnect offline &nbsp;&nbsp;&nbsp;&nbsp;Reset offli=
+ne/unauthorized devices to force reconnect.</p><h1><a class=3D"h" name=3D"U=
+SB" href=3D"https://android.googlesource.com/platform/packages/modules/adb/=
++/refs/heads/main/docs/user/adb.1.md#USB"><span></span></a><a class=3D"h" n=
+ame=3D"usb" href=3D"https://android.googlesource.com/platform/packages/modu=
+les/adb/+/refs/heads/main/docs/user/adb.1.md#usb"><span></span></a>USB:</h1=
+><p>Only valid when running with libusb backend.</p><p>attach <strong>SERIA=
+L</strong> &nbsp;&nbsp;&nbsp;&nbsp;Attach a detached USB device identified =
+by its <strong>SERIAL</strong> number.</p><p>detach <strong>SERIAL</strong>=
+ &nbsp;&nbsp;&nbsp;&nbsp;Detach from a USB device identified by its <strong=
+>SERIAL</strong> to allow use by other processes.</p><h1><a class=3D"h" nam=
+e=3D"Features" href=3D"https://android.googlesource.com/platform/packages/m=
+odules/adb/+/refs/heads/main/docs/user/adb.1.md#Features"><span></span></a>=
+<a class=3D"h" name=3D"features" href=3D"https://android.googlesource.com/p=
+latform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#features"=
+><span></span></a>Features:</h1><p>host-features<br>&nbsp;&nbsp;&nbsp;&nbsp=
+;list features supported by adb server.</p><p>features<br>&nbsp;&nbsp;&nbsp=
+;&nbsp;list features supported by both adb server and device.</p><h1><a cla=
+ss=3D"h" name=3D"ENVIRONMENT-VARIABLES" href=3D"https://android.googlesourc=
+e.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#EN=
+VIRONMENT-VARIABLES"><span></span></a><a class=3D"h" name=3D"environment-va=
+riables" href=3D"https://android.googlesource.com/platform/packages/modules=
+/adb/+/refs/heads/main/docs/user/adb.1.md#environment-variables"><span></sp=
+an></a>ENVIRONMENT VARIABLES</h1><p>$ADB_TRACE &nbsp;&nbsp;&nbsp;&nbsp;Comm=
+a (or space) separated list of debug info to log: all,adb,sockets,packets,r=
+wx,usb,sync,sysdeps,transport,jdwp.</p><p>$ADB_VENDOR_KEYS &nbsp;&nbsp;&nbs=
+p;&nbsp;Colon-separated list of keys (files or directories).</p><p>$ANDROID=
+_SERIAL &nbsp;&nbsp;&nbsp;&nbsp;Serial number to connect to (see -s).</p><p=
+>$ANDROID_LOG_TAGS &nbsp;&nbsp;&nbsp;&nbsp;Tags to be used by logcat (see l=
+ogcat --help).</p><p>$ADB_LOCAL_TRANSPORT_MAX_PORT &nbsp;&nbsp;&nbsp;&nbsp;=
+Max emulator scan port (default 5585, 16 emulators).</p><p>$ADB_MDNS_AUTO_C=
+ONNECT &nbsp;&nbsp;&nbsp;&nbsp;Comma-separated list of mdns services to all=
+ow auto-connect (default adb-tls-connect).</p><p>$ADB_MDNS_OPENSCREEN &nbsp=
+;&nbsp;&nbsp;&nbsp;The default mDNS-SD backend is Bonjour (mdnsResponder). =
+For machines where Bonjour is not installed, adb can spawn its own, embedde=
+d, mDNS-SD back end, openscreen. If set to =E2=80=9C1=E2=80=9D, this env va=
+riable forces mDNS backend to openscreen.</p><p>$ADB_LIBUSB &nbsp;&nbsp;&nb=
+sp;&nbsp;ADB has its own USB backend implementation but can also employ lib=
+usb. use <code class=3D"code">adb devices -l</code> (<code class=3D"code">u=
+sb:</code> prefix is omitted for libusb)  or <code class=3D"code">adb host-=
+features</code> (look for <code class=3D"code">libusb</code> in the output =
+list) to identify which is in use. To override the default for your OS, set=
+ ADB_LIBUSB to =E2=80=9C1=E2=80=9D to enable libusb, or =E2=80=9C0=E2=80=9D=
+ to enable the ADB backend implementation.</p><h1><a class=3D"h" name=3D"BU=
+GS" href=3D"https://android.googlesource.com/platform/packages/modules/adb/=
++/refs/heads/main/docs/user/adb.1.md#BUGS"><span></span></a><a class=3D"h" =
+name=3D"bugs" href=3D"https://android.googlesource.com/platform/packages/mo=
+dules/adb/+/refs/heads/main/docs/user/adb.1.md#bugs"><span></span></a>BUGS<=
+/h1><p>See Issue Tracker: <a href=3D"https://issuetracker.google.com/issues=
+/new?component=3D192795&amp;template=3D1310483">here</a>.</p><h1><a class=
+=3D"h" name=3D"AUTHORS" href=3D"https://android.googlesource.com/platform/p=
+ackages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#AUTHORS"><span></s=
+pan></a><a class=3D"h" name=3D"authors" href=3D"https://android.googlesourc=
+e.com/platform/packages/modules/adb/+/refs/heads/main/docs/user/adb.1.md#au=
+thors"><span></span></a>AUTHORS</h1><p>See <a href=3D"https://android.googl=
+esource.com/platform/packages/modules/adb/+/refs/heads/main/OWNERS">OWNERS<=
+/a> file in ADB AOSP repo.</p></div></div></div><!-- default customFooter -=
+-><footer class=3D"Site-footer"><div class=3D"Footer"><span class=3D"Footer=
+-poweredBy">Powered by <a href=3D"https://gerrit.googlesource.com/gitiles/"=
+>Gitiles</a>| <a href=3D"https://policies.google.com/privacy">Privacy</a>| =
+<a href=3D"https://policies.google.com/terms">Terms</a></span><div class=3D=
+"Footer-links"></div></div></footer></body></html>
+------MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://android.googlesource.com/+static/base.css
+
+@charset "utf-8";
+
+@import url("//fonts.googleapis.com/css?family=3DOpen+Sans:300,400,700&subs=
+et=3Dlatin,cyrillic-ext,greek-ext,cyrillic,greek,vietnamese,latin-ext");
+
+@import url("//fonts.googleapis.com/css?family=3DSource+Code+Pro");
+
+*, ::after, ::before { box-sizing: border-box; margin: 0px; padding: 0px; }
+
+h1, h2, h3, h4, h5, h6 { font-weight: normal; margin: 0.25em 0px 0.5em; }
+
+h1 { font-size: 2em; }
+
+h2 { font-size: 1.5em; }
+
+h3 { font-size: 1.3em; }
+
+h4, h5, h6 { font-size: 14px; font-style: italic; }
+
+ul, ol { list-style: none; }
+
+.u-sha1 { background-color: rgb(241, 242, 243); color: rgb(0, 0, 0); font-s=
+ize: 13px; }
+
+.u-pre { font-size: 10pt; white-space: pre; }
+
+.u-lineNum { border-right: 1px solid rgb(241, 242, 243); color: rgb(102, 10=
+2, 102); display: inline-block; min-width: 3em; text-align: right; }
+
+.u-noSelect { user-select: none; }
+
+.u-monospace { font-family: "Source Code Pro", monospace; }
+
+.Site { background: rgb(255, 255, 255); color: rgb(0, 0, 0); display: flex;=
+ font: 14px / 1.54 "Open Sans", sans-serif; min-height: 100vh; -webkit-box-=
+orient: vertical; -webkit-box-direction: normal; flex-direction: column; }
+
+.Site-header, .Site-footer { background: rgb(238, 238, 238); -webkit-box-fl=
+ex: 0; flex: 0 0 auto; }
+
+.Site-header--withNavbar { background: rgb(255, 255, 255); }
+
+.Site-content { -webkit-box-flex: 1; flex: 1 0 auto; padding: 20px; }
+
+.Container { margin: 0px auto; max-width: 980px; }
+
+.Container--fullWidth { max-width: none; }
+
+.Header, .Footer { -webkit-box-align: center; align-items: center; display:=
+ flex; padding: 20px; }
+
+.Site-header--withNavbar .Header { max-width: 1020px; margin: 0px auto; pad=
+ding: 10px 20px; }
+
+.Header-title, .Header-image { display: flex; -webkit-box-flex: 1; flex: 1 =
+1 0%; }
+
+.Header-anchor { color: rgb(102, 102, 102); font-size: 32px; font-weight: 3=
+00; text-decoration: none; }
+
+.Header-anchorLogo { display: inline-block; margin-right: 10px; vertical-al=
+ign: middle; }
+
+.Header-nav { background: rgb(238, 238, 238); padding: 15px 0px; }
+
+.Header-menu { display: flex; -webkit-box-pack: end; justify-content: flex-=
+end; }
+
+.Header-menuItem { color: rgb(0, 0, 238); display: inline-block; margin-lef=
+t: 15px; }
+
+.Header-menuItem--noAction { color: inherit; }
+
+.Breadcrumbs { font-size: 18px; margin-bottom: 20px; }
+
+.Breadcrumbs-crumb { color: rgb(0, 0, 238); }
+
+.Breadcrumbs-crumb:last-child { color: rgb(0, 0, 0); font-weight: bold; }
+
+.Footer { color: rgb(102, 102, 102); }
+
+.Footer-poweredBy { -webkit-box-flex: 1; flex: 1 1 0%; }
+
+.Footer-formats, .Footer-links { display: flex; -webkit-box-pack: end; just=
+ify-content: flex-end; }
+
+.Footer-formatsItem { display: inline-block; }
+
+.Footer-formatsItem:first-child { margin-right: 20px; }
+
+.Footer-link { display: inline-block; margin-left: 10px; }
+
+.RepoList-item { display: flex; left: -10px; padding: 5px 0px 5px 10px; pos=
+ition: relative; white-space: nowrap; width: calc(100% + 20px); }
+
+.RepoList-item:link, .RepoList-item:visited { text-decoration: none; }
+
+.RepoList-item:hover { background: rgb(238, 238, 238); }
+
+.RepoList-item--header { font-weight: bold; margin: 0px; }
+
+.RepoList-item--header:hover { background: rgb(255, 255, 255); }
+
+.RepoList-itemName, .RepoList-itemDescription { display: inline-block; }
+
+.RepoList-itemName { margin-right: 10px; min-width: 25%; text-decoration: u=
+nderline; }
+
+.RepoList-item--header > .RepoList-itemName { text-decoration: none; }
+
+.RepoList-itemDescription { color: rgb(0, 0, 0); -webkit-box-flex: 1; flex:=
+ 1 1 0%; overflow: hidden; text-overflow: ellipsis; }
+
+.RepoDescription { margin: 10px 0px; }
+
+.RepoMirroredFrom { margin: 10px 0px; color: rgb(102, 102, 102); }
+
+.CloneRepo { background: rgb(238, 238, 238); margin-bottom: 20px; padding: =
+10px; }
+
+.CloneRepo-title { margin-bottom: 2px; }
+
+.CloneRepo-command { border: 1px solid rgb(204, 204, 204); border-radius: 4=
+px; display: block; font-size: inherit; padding: 10px; width: 100%; }
+
+.RepoShortlog { display: flex; }
+
+.RepoShortlog-refs { width: 20%; -webkit-box-flex: 0 !important; flex: 0 0 =
+auto !important; }
+
+.RepoShortlog-refs > .RefList:first-child { margin: 0px; }
+
+.RepoShortlog-log { -webkit-box-flex: 1; flex: 1 1 0%; width: 80%; }
+
+.RepoIndexDoc { border-top: 1px solid rgb(221, 221, 221); margin-top: 20px;=
+ padding-top: 5px; }
+
+.EmptyRepo-description { font-size: 14px; font-style: italic; }
+
+@media (max-width: 550px) {
+  .RepoShortlog { -webkit-box-orient: vertical; -webkit-box-direction: norm=
+al; flex-direction: column; }
+  .RepoShortlog-refs { width: auto; border-bottom: 1px solid rgb(221, 221, =
+221); margin-bottom: 20px; padding-bottom: 20px; }
+  .RepoShortlog-refs > .RefList:last-child { margin-bottom: 0px; }
+  .RepoShortlog-log { width: auto; }
+}
+
+.RefList { margin: 15px 0px; }
+
+.RefList-title { margin: 0px; }
+
+.RefList-items { overflow-wrap: break-word; }
+
+.RefList-item { padding: 2px 0px; }
+
+@media (max-width: 550px) {
+  .RefList--responsive .RefList-item { display: inline-block; margin-right:=
+ 6px; }
+}
+
+.LogNav { margin: 10px 0px; text-align: center; }
+
+.CommitLog-item { padding: 2px 0px; }
+
+.CommitLog-item--oneline:hover { background: rgb(238, 238, 238); }
+
+.CommitLog-item--full { margin-bottom: 20px; }
+
+.CommitLog-item--empty { padding: 10px 0px; text-align: center; }
+
+.CommitLog-sha1 { border-radius: 3px; display: inline-block; margin-right: =
+3px; padding: 2px 4px; text-align: center; }
+
+.CommitLog-time { color: rgb(102, 102, 102); }
+
+.CommitLog-branchLabel { color: rgb(221, 75, 57); }
+
+.CommitLog-tagLabel { color: rgb(0, 153, 51); }
+
+.CommitLog-rename { font-size: 0.9em; display: block; padding-left: 5px; }
+
+.Metadata { margin-bottom: 15px; }
+
+.Metadata-title { font-weight: bold; padding-right: 10px; text-align: right=
+; }
+
+.MetadataMessage { background-color: rgb(250, 250, 250); border: 1px solid =
+rgb(204, 204, 204); color: rgb(0, 0, 0); margin: 0px; padding: 12px; white-=
+space: pre-wrap; }
+
+.DiffTree { margin: 10px 0px 5px; }
+
+.DiffTree-action { margin-left: 0.5em; }
+
+.DiffTree-action--add { color: rgb(0, 102, 0); }
+
+.DiffTree-action--delete { color: rgb(102, 0, 0); }
+
+.DiffTree-action--rename, .DiffTree-action--copy { color: rgb(0, 0, 102); }
+
+.TreeDetail-sha1, .BlobSha1 { margin: 10px 0px; padding: 5px 10px; }
+
+.FileList { margin-left: 25px; }
+
+.FileList-item { padding: 1px 0px; position: relative; }
+
+.FileList-item:hover { background: rgb(238, 238, 238); }
+
+.FileList-item::before { left: -22px; position: absolute; top: 4px; }
+
+.FileList-itemLink { display: block; }
+
+.FileList-item--gitTree::before { content: url("data:image/png;base64,iVBOR=
+w0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAN=
+1wAADdcBQiibeAAAAb5JREFUOMulkr1KA0EQgGdvTwwnYmER0gQsrFKmSy+pLESw9Qm0F/ICNnb=
+a+h6iEOuAEWslKJKTOyJJvIT72d1xZuOFC0giOLA77O7Mt/PnNptN+I+49Xr9GhH3f3mb0v1ht9=
+vtLAUYYw5ItkgDL3KyD8PhcLvdbl/WarXT3DjLMnAcR/f7/YfxeKwtgC5RKQVhGILWeg4hQ6hUK=
+jWyucmhLFEUuWR3QYBWAZABQ9i5CCmXy16pVALP80BKaaG+70MQBLvzFMjRKKXh8j6FSYKF7ITd=
+EWLa4/ktokN74wiqjSMpnVcbQZqmEJHz+ckeCPFjWKwULpyspAqhdXVXdcnZcPjsIgn+2BsVA8j=
+VYuWlgJ3yBj0icgq2uoK+lg4t+ZvLomSKamSQ4AI5BcMADtMhyNoSgNIISUaFNtwlazcDcBc4gj=
+jVwCWid2usCWroYEhnaqbzFJLUzAHIXRDChXCcQP8zhkSZ5eNLgHAUzwDcRu4CoIRn/wsGUQIIy=
+4Vr9TH6SYFCNzw4nALn5627K4vIttOUOwfa5YnrDYzt/9OLv9I5l8kk5hZ3XLO20b7tbR7zHLy/=
+BX8G0IeBEM7ZN1NGIaFUaKLgAAAAAElFTkSuQmCC"); }
+
+.FileList-item--symlink::before { content: url("data:image/png;base64,iVBOR=
+w0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMA=
+AA3XAAAN1wFCKJt4AAABZUlEQVQ4y2NgIAL4zWL7D8TGDOQCqAEg7Ey2Aes+58AMcSSkmB2I3YB=
+4HhCfh9kOMoCgIUAJMyDe2D+b58jKe553133M+r/uU/b/zV+L/y97n/i/+JIYbkOAAl5AfGLNTd=
+e/69+n/1/4MuD/gtsqKBhkALIh5S0M1jDN2kC8a+UNt/8b36f+X3JP5f/0u1pwjeuvS8E1g3DpZ=
+Qm4ITAD5s09ZPBq49uE/0vvq4E1gPCJC5z/yy+IoGgG4a5HJqjeCJ3Pc2vjy+T/ux4Y/j99Rfz/=
+7GtK/xfeUkbBN+8pY9cMAkFzuT5uepPy/+w1lf+TF3L/Q4p3OD5zRQ67Zlg873vk9n/mMlaQ5Ec=
+gLgZiA2R5nJphCjbfNP8LVeCBJyUa40xpO+5afQXS/8jKC0DJg+uPKx+bOJf1HDYXEJPW46JW8L=
+cduKYzbdZMph4gn4ccQxSAOAuIo4FYdvsKFpYdK1iYCekDACq5JXDHGJhDAAAAAElFTkSuQmCC"=
+); }
+
+.FileList-item--regularFile::before { content: url("data:image/png;base64,i=
+VBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI=
+WXMAAAsTAAALEwEAmpwYAAAAtElEQVQ4ja2TSw7CIBRFu0r3wyIYsAMHDl1CC92IDqC0wAbQi4F=
+o5VOMJGcAyT33vQEDY+xCCPGdnIZ48NB7kPkSLMvipZQBpVQC70Br7Y0xZQGC4zj6aZoCnPMPhB=
+Btwb41NoN1XesCBHPNhyfI7fziFu6HJti3IgS0vrcFuZ3Btm2JpmC/M5jnOdEU5JoRstYmigKES=
+80x7JyrC+IE7+1xAoSrgp//AqX02vsbn5nz8K/zAP9CzjbgFoHjAAAAAElFTkSuQmCC"); }
+
+.FileList-item--executableFile::before { content: url("data:image/png;base6=
+4,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA7ADsAOwdIxY2AAAAC=
+XBIWXMAAAsTAAALEwEAmpwYAAABOklEQVQ4T5WTTYqDQBBGPdKcZnIJdy7EVRByBQPi0iwHAlGT=
+0YBHcG82kkV2VnffoKar7FYzIQYLPtqffq+rEJ04jn/CMMSV+XZs0YO1RcyLoO/7MdAD9gAI8wi=
+K+CyYA0IDFABhrmFBAHNYbwYTIxFyWN8KwAiEmIEaknqVUposCoBBGE8cIGUipUKp5IJAzOe2Jx=
+I0pG1b3Gw2+Hg8FjoQzy0rLVAavt0GuGkaXrfb7avAzs0CNcHtDD4ejwzTve/7X/9GGFqn2QmkD=
+mzbBJ9OJ8yyDNM0Rdd1J8mzgDqQPDNJLFwUBZ7PZ7xcLizwPI9gfj+NYAX2k+kx7vc7byrLEquq=
+wuv1ivv9HpMk4ec6Uwfvqus63lzXNeZ5zoIRpoqiKP/09wVBwNDhcOB1t9v9OmuLTnw62dQfVIH=
+PYx/I/0kAAAAASUVORK5CYII=3D"); }
+
+.FileList-item--gitlink::before { content: url("data:image/png;base64,iVBOR=
+w0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMA=
+AA3XAAAN1wFCKJt4AAABO0lEQVQ4T7WT3U6EMBCF92m99yGMZuODGL01eueyXqjvwc+WUlooUPk=
+fZxq3sQEvJLHJSQvlfDOnDbub/dUFCrZof3t9uaPF1kFeBwjD8E+apukfAVEUQRzHkCQJJKfEzn=
+ES43tUGP0OIOMheIGn50e4f7izCo4H4GkKDEXPBIviCIZh8AFkfv94g5Qx4Jw7AOn4Grh1iqATd=
+rUAEJmxFLIsgzzPQSnpQc4SIkMIh7ZtfQCjys6soNQlVFW1AEgpQWQCjDE+gHIKIaxZo7mu69UO=
+iqJwRXxAxnFDQllS5XUzSeO+kmoJoOzUni41NE1tM9JBTdMII85d14FpjI2lihUA9wCNA8zzDOM=
+4WkBjvgFqrQO8ulzmNgLl/8SPyTT0WL3vLLBGsNZ6HUBV1tT3vROd/Fk/AZt/Z/J+AUN8ayghXm=
+ezAAAAAElFTkSuQmCC"); }
+
+.FileContents { border-collapse: collapse; border-spacing: 0px; margin: 10p=
+x 0px; }
+
+.FileContents-line { border: none; }
+
+.FileContents-lineNum { padding-right: 10px; width: 1%; }
+
+.FileContents-lineNum::before { color: rgb(170, 170, 170); content: attr(da=
+ta-line-number); cursor: pointer; }
+
+.FileContents-lineContents { line-height: 1.3em; min-height: 1em; padding-l=
+eft: 10px; }
+
+.FileContents-lineContents:target { background: rgb(207, 216, 220); }
+
+.InlineReadme { border-top: 1px solid rgb(221, 221, 221); margin: 10px 0px;=
+ padding: 7px 0px; }
+
+.InlineReadme-path { color: rgb(102, 102, 102); }
+
+.Blame { border-collapse: collapse; font-size: 8pt; margin: 0px auto; }
+
+.Blame-region--bg1 { background: rgb(255, 255, 255); }
+
+.Blame-region--bg2 { background: rgb(241, 242, 243); }
+
+.Blame-sha1, .Blame-author, .Blame-time, .Blame-regionLink { font-size: 8pt=
+; padding: 0px 3px; white-space: nowrap; }
+
+.Blame-regionLink { text-align: right; }
+
+.Blame-lineNum .u-lineNum { padding: 0px 8px; text-align: right; }
+
+.Blame-lineNum:hover { text-decoration: underline; }
+
+.Blame-lineContent { font-size: 9pt; line-height: 1.3em; padding: 0px 8px; =
+}
+
+.Diff { margin: 10px 0px; }
+
+.Diff-fileIndex { color: rgb(68, 68, 68); font-weight: bold; }
+
+.Diff-unified { border-bottom: 1px solid rgb(221, 221, 221); border-top: 1p=
+x solid rgb(221, 221, 221); padding: 10px 0px; }
+
+.Diff-hunk { color: rgb(0, 0, 204); }
+
+.Diff-delete { color: rgb(204, 0, 0); }
+
+.Diff-insert { color: rgb(0, 136, 0); }
+
+sentinel { }
+------MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin,cyrillic-ext,greek-ext,cyrillic,greek,vietnamese,latin-ext
+
+@charset "utf-8";
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu1aB.woff2") format("woff2"); unicode=
+-range: U+460-52F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE=
+2F; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu1aB.woff2") format("woff2"); unicode=
+-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu1aB.woff2") format("woff2"); unicode=
+-range: U+1F00-1FFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu1aB.woff2") format("woff2"); unicode=
+-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu1aB.woff2") format("woff2"); unicode=
+-range: U+590-5FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTVOmu1aB.woff2") format("woff2"); unicode=
+-range: U+302-303, U+305, U+307-308, U+330, U+391-3A1, U+3A3-3A9, U+3B1-3C9=
+, U+3D1, U+3D5-3D6, U+3F0-3F1, U+3F4-3F5, U+2034-2037, U+2057, U+20D0-20DC,=
+ U+20E1, U+20E5-20EF, U+2102, U+210A-210E, U+2110-2112, U+2115, U+2119-211D=
+, U+2124, U+2128, U+212C-212D, U+212F-2131, U+2133-2138, U+213C-2140, U+214=
+5-2149, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211,=
+ U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336=
+-237A, U+237C, U+2395, U+239B-23B6, U+23D0, U+23DC-23E1, U+2474-2475, U+25A=
+F, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+2=
+7C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+FF5B, U+FF5D, U+=
+1D400-1D7FF, U+1EE00-1EEFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTUGmu1aB.woff2") format("woff2"); unicode=
+-range: U+1-C, U+E-1F, U+7F-9F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+21=
+90, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, =
+U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28F=
+F, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FF=
+FB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+=
+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+=
+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F3=
+36, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF,=
+ U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3=
+F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F4=
+42, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4=
+A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+=
+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4=
+FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+=
+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+=
+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6=
+D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F8=
+0B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8=
+B1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA=
+6F, U+1FA70-1FA7C, U+1FA80-1FA88, U+1FA90-1FABD, U+1FABF-1FAC5, U+1FACE-1FA=
+DB, U+1FAE0-1FAE8, U+1FAF0-1FAF8, U+1FB00-1FBFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu1aB.woff2") format("woff2"); unicode=
+-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U=
++300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu1aB.woff2") format("woff2"); unicode=
+-range: U+100-2AF, U+304, U+308, U+329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U=
++20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 300=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2") format("woff2"); unicode-r=
+ange: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+30=
+8, U+329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+22=
+15, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu1aB.woff2") format("woff2"); unicode=
+-range: U+460-52F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE=
+2F; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu1aB.woff2") format("woff2"); unicode=
+-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu1aB.woff2") format("woff2"); unicode=
+-range: U+1F00-1FFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu1aB.woff2") format("woff2"); unicode=
+-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu1aB.woff2") format("woff2"); unicode=
+-range: U+590-5FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTVOmu1aB.woff2") format("woff2"); unicode=
+-range: U+302-303, U+305, U+307-308, U+330, U+391-3A1, U+3A3-3A9, U+3B1-3C9=
+, U+3D1, U+3D5-3D6, U+3F0-3F1, U+3F4-3F5, U+2034-2037, U+2057, U+20D0-20DC,=
+ U+20E1, U+20E5-20EF, U+2102, U+210A-210E, U+2110-2112, U+2115, U+2119-211D=
+, U+2124, U+2128, U+212C-212D, U+212F-2131, U+2133-2138, U+213C-2140, U+214=
+5-2149, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211,=
+ U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336=
+-237A, U+237C, U+2395, U+239B-23B6, U+23D0, U+23DC-23E1, U+2474-2475, U+25A=
+F, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+2=
+7C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+FF5B, U+FF5D, U+=
+1D400-1D7FF, U+1EE00-1EEFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTUGmu1aB.woff2") format("woff2"); unicode=
+-range: U+1-C, U+E-1F, U+7F-9F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+21=
+90, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, =
+U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28F=
+F, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FF=
+FB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+=
+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+=
+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F3=
+36, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF,=
+ U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3=
+F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F4=
+42, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4=
+A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+=
+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4=
+FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+=
+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+=
+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6=
+D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F8=
+0B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8=
+B1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA=
+6F, U+1FA70-1FA7C, U+1FA80-1FA88, U+1FA90-1FABD, U+1FABF-1FAC5, U+1FACE-1FA=
+DB, U+1FAE0-1FAE8, U+1FAF0-1FAF8, U+1FB00-1FBFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu1aB.woff2") format("woff2"); unicode=
+-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U=
++300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu1aB.woff2") format("woff2"); unicode=
+-range: U+100-2AF, U+304, U+308, U+329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U=
++20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 400=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2") format("woff2"); unicode-r=
+ange: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+30=
+8, U+329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+22=
+15, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu1aB.woff2") format("woff2"); unicode=
+-range: U+460-52F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE=
+2F; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu1aB.woff2") format("woff2"); unicode=
+-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu1aB.woff2") format("woff2"); unicode=
+-range: U+1F00-1FFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu1aB.woff2") format("woff2"); unicode=
+-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu1aB.woff2") format("woff2"); unicode=
+-range: U+590-5FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTVOmu1aB.woff2") format("woff2"); unicode=
+-range: U+302-303, U+305, U+307-308, U+330, U+391-3A1, U+3A3-3A9, U+3B1-3C9=
+, U+3D1, U+3D5-3D6, U+3F0-3F1, U+3F4-3F5, U+2034-2037, U+2057, U+20D0-20DC,=
+ U+20E1, U+20E5-20EF, U+2102, U+210A-210E, U+2110-2112, U+2115, U+2119-211D=
+, U+2124, U+2128, U+212C-212D, U+212F-2131, U+2133-2138, U+213C-2140, U+214=
+5-2149, U+2190, U+2192, U+2194-21AE, U+21B0-21E5, U+21F1-21F2, U+21F4-2211,=
+ U+2213-2214, U+2216-22FF, U+2308-230B, U+2310, U+2319, U+231C-2321, U+2336=
+-237A, U+237C, U+2395, U+239B-23B6, U+23D0, U+23DC-23E1, U+2474-2475, U+25A=
+F, U+25B3, U+25B7, U+25BD, U+25C1, U+25CA, U+25CC, U+25FB, U+266D-266F, U+2=
+7C0-27FF, U+2900-2AFF, U+2B0E-2B11, U+2B30-2B4C, U+2BFE, U+FF5B, U+FF5D, U+=
+1D400-1D7FF, U+1EE00-1EEFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTUGmu1aB.woff2") format("woff2"); unicode=
+-range: U+1-C, U+E-1F, U+7F-9F, U+20DD-20E0, U+20E2-20E4, U+2150-218F, U+21=
+90, U+2192, U+2194-2199, U+21AF, U+21E6-21F0, U+21F3, U+2218-2219, U+2299, =
+U+22C4-22C6, U+2300-243F, U+2440-244A, U+2460-24FF, U+25A0-27BF, U+2800-28F=
+F, U+2921-2922, U+2981, U+29BF, U+29EB, U+2B00-2BFF, U+4DC0-4DFF, U+FFF9-FF=
+FB, U+10140-1018E, U+10190-1019C, U+101A0, U+101D0-101FD, U+102E0-102FB, U+=
+10E60-10E7E, U+1D2C0-1D2D3, U+1D2E0-1D37F, U+1F000-1F0FF, U+1F100-1F1AD, U+=
+1F1E6-1F1FF, U+1F30D-1F30F, U+1F315, U+1F31C, U+1F31E, U+1F320-1F32C, U+1F3=
+36, U+1F378, U+1F37D, U+1F382, U+1F393-1F39F, U+1F3A7-1F3A8, U+1F3AC-1F3AF,=
+ U+1F3C2, U+1F3C4-1F3C6, U+1F3CA-1F3CE, U+1F3D4-1F3E0, U+1F3ED, U+1F3F1-1F3=
+F3, U+1F3F5-1F3F7, U+1F408, U+1F415, U+1F41F, U+1F426, U+1F43F, U+1F441-1F4=
+42, U+1F444, U+1F446-1F449, U+1F44C-1F44E, U+1F453, U+1F46A, U+1F47D, U+1F4=
+A3, U+1F4B0, U+1F4B3, U+1F4B9, U+1F4BB, U+1F4BF, U+1F4C8-1F4CB, U+1F4D6, U+=
+1F4DA, U+1F4DF, U+1F4E3-1F4E6, U+1F4EA-1F4ED, U+1F4F7, U+1F4F9-1F4FB, U+1F4=
+FD-1F4FE, U+1F503, U+1F507-1F50B, U+1F50D, U+1F512-1F513, U+1F53E-1F54A, U+=
+1F54F-1F5FA, U+1F610, U+1F650-1F67F, U+1F687, U+1F68D, U+1F691, U+1F694, U+=
+1F698, U+1F6AD, U+1F6B2, U+1F6B9-1F6BA, U+1F6BC, U+1F6C6-1F6CF, U+1F6D3-1F6=
+D7, U+1F6E0-1F6EA, U+1F6F0-1F6F3, U+1F6F7-1F6FC, U+1F700-1F7FF, U+1F800-1F8=
+0B, U+1F810-1F847, U+1F850-1F859, U+1F860-1F887, U+1F890-1F8AD, U+1F8B0-1F8=
+B1, U+1F900-1F90B, U+1F93B, U+1F946, U+1F984, U+1F996, U+1F9E9, U+1FA00-1FA=
+6F, U+1FA70-1FA7C, U+1FA80-1FA88, U+1FA90-1FABD, U+1FABF-1FAC5, U+1FACE-1FA=
+DB, U+1FAE0-1FAE8, U+1FAF0-1FAF8, U+1FB00-1FBFF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu1aB.woff2") format("woff2"); unicode=
+-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U=
++300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu1aB.woff2") format("woff2"); unicode=
+-range: U+100-2AF, U+304, U+308, U+329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U=
++20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Open Sans"; font-style: normal; font-weight: 700=
+; font-stretch: 100%; src: url("https://fonts.gstatic.com/s/opensans/v40/me=
+mvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2") format("woff2"); unicode-r=
+ange: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+30=
+8, U+329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+22=
+15, U+FEFF, U+FFFD; }
+------MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://fonts.googleapis.com/css?family=Source+Code+Pro
+
+@charset "utf-8";
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("https://fonts.gstatic.com/s/sourcecodepro/v23/HI_diYsKILx=
+Rpg3hIP6sJ7fM7PqPMcMnZFqUwX28DMyQtMRrTEUc.woff2") format("woff2"); unicode-=
+range: U+460-52F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2=
+F; }
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("https://fonts.gstatic.com/s/sourcecodepro/v23/HI_diYsKILx=
+Rpg3hIP6sJ7fM7PqPMcMnZFqUwX28DMyQtM1rTEUc.woff2") format("woff2"); unicode-=
+range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("https://fonts.gstatic.com/s/sourcecodepro/v23/HI_diYsKILx=
+Rpg3hIP6sJ7fM7PqPMcMnZFqUwX28DMyQtMVrTEUc.woff2") format("woff2"); unicode-=
+range: U+1F00-1FFF; }
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("https://fonts.gstatic.com/s/sourcecodepro/v23/HI_diYsKILx=
+Rpg3hIP6sJ7fM7PqPMcMnZFqUwX28DMyQtMprTEUc.woff2") format("woff2"); unicode-=
+range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; }
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("https://fonts.gstatic.com/s/sourcecodepro/v23/HI_diYsKILx=
+Rpg3hIP6sJ7fM7PqPMcMnZFqUwX28DMyQtMZrTEUc.woff2") format("woff2"); unicode-=
+range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1B0, U+=
+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("https://fonts.gstatic.com/s/sourcecodepro/v23/HI_diYsKILx=
+Rpg3hIP6sJ7fM7PqPMcMnZFqUwX28DMyQtMdrTEUc.woff2") format("woff2"); unicode-=
+range: U+100-2AF, U+304, U+308, U+329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+=
+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Source Code Pro"; font-style: normal; font-weigh=
+t: 400; src: url("https://fonts.gstatic.com/s/sourcecodepro/v23/HI_diYsKILx=
+Rpg3hIP6sJ7fM7PqPMcMnZFqUwX28DMyQtMlrTA.woff2") format("woff2"); unicode-ra=
+nge: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, U+308=
+, U+329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+221=
+5, U+FEFF, U+FFFD; }
+------MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://android.googlesource.com/+static/doc.css
+
+@charset "utf-8";
+
+.Site-Content--markdown { padding-top: 0px; }
+
+.Header-nav ul { max-width: 1020px; margin: 0px auto; padding: 0px 20px; }
+
+.Header-nav li { display: inline-block; margin-right: 15px; }
+
+.doc h1, .doc h2, .doc h3, .doc h4, .doc h5, .doc h6 { font-weight: normal;=
+ margin: 1.236em 0px 0.618em; }
+
+.doc.RepoIndexDoc h1 { margin-top: 0.25em; }
+
+.doc h1 { font-size: 2em; }
+
+.doc h2 { font-size: 1.5em; }
+
+.doc h3 { font-size: 1.3em; }
+
+.doc h4 { font-size: 1.3em; font-weight: lighter; font-style: italic; }
+
+.doc h5 { font-size: 16px; font-weight: lighter; font-style: italic; }
+
+.doc h6 { font-size: 14px; font-style: italic; }
+
+.doc hr { border-right: none; border-bottom: none; border-left: none; borde=
+r-image: initial; border-top: 1px solid rgb(170, 170, 170); display: block;=
+ margin-top: 25px; }
+
+.doc a { text-decoration: none; }
+
+.doc a:link { color: rgb(36, 93, 193); }
+
+.doc a:visited { color: rgb(119, 89, 174); }
+
+.doc a:hover { text-decoration: underline; }
+
+.doc a.h { display: inline-block; font-weight: normal; width: 1.5em; margin=
+-left: -1.5em; margin-top: -1em; margin-bottom: -1em; }
+
+.doc a.h:link, .doc a.h:visited { color: rgb(68, 68, 68); }
+
+.doc a.h:focus { outline: none; }
+
+.doc a.h:hover { text-decoration: none; }
+
+.doc a.h span { display: inline-block; width: 1.5em; }
+
+.doc h1:hover a.h span::before, .doc h2:hover a.h span::before, .doc h3:hov=
+er a.h span::before, .doc h4:hover a.h span::before, .doc h5:hover a.h span=
+::before, .doc h6:hover a.h span::before { content: "#"; font-weight: norma=
+l; color: rgb(170, 170, 170); }
+
+.doc h1:hover a:hover.h span::before, .doc h2:hover a:hover.h span::before,=
+ .doc h3:hover a:hover.h span::before, .doc h4:hover a:hover.h span::before=
+, .doc h5:hover a:hover.h span::before, .doc h6:hover a:hover.h span::befor=
+e { text-decoration: underline; }
+
+.doc h1:hover a:visited.h span::before, .doc h2:hover a:visited.h span::bef=
+ore, .doc h3:hover a:visited.h span::before, .doc h4:hover a:visited.h span=
+::before, .doc h5:hover a:visited.h span::before, .doc h6:hover a:visited.h=
+ span::before { color: rgb(170, 170, 170); }
+
+.doc ul, .doc ol { margin: 10px 10px 10px 30px; padding: 0px; }
+
+.doc ul { list-style-type: disc; }
+
+.doc ol { list-style-type: decimal; }
+
+.doc img { border: 0px; max-width: 100%; }
+
+.doc iframe { min-width: 100px; min-height: 30px; }
+
+iframe.noborder { border: 0px; }
+
+.doc em { font-weight: normal; font-style: italic; }
+
+.doc strong { font-weight: bold; color: inherit; }
+
+.doc p { margin: 10px 0px; }
+
+.doc blockquote { background-color: rgb(255, 253, 231); border-left: 2px so=
+lid rgb(250, 183, 0); padding: 2px 10px; }
+
+.doc pre { padding: 12px; font-size: 10pt; background-color: rgb(250, 250, =
+250); border: 1px solid rgb(204, 204, 204); overflow-x: auto; }
+
+.doc code { padding: 2px 4px; background-color: rgb(245, 245, 245); border:=
+ transparent; border-radius: 4px; }
+
+.doc .code { font-family: "Source Code Pro", monospace; }
+
+.doc dl dt { margin-top: 1em; }
+
+.doc table { border-collapse: collapse; border-spacing: 0px; }
+
+.doc th { text-align: center; }
+
+.doc th, .doc td { border: 1px solid rgb(238, 238, 238); padding: 4px 12px;=
+ vertical-align: top; }
+
+.doc th { background-color: rgb(245, 245, 245); }
+
+.toc { margin-top: 30px; }
+
+.toc-aux { background: rgb(249, 249, 249); border: 1px solid rgb(242, 242, =
+242); }
+
+.toc h2 { margin: 0px 0px 5px; }
+
+.toc ul { margin: 10px 10px 10px 30px; }
+
+.toc ul li { margin-left: 0px; list-style: disc; }
+
+.toc ul ul { margin-top: 0px; margin-bottom: 0px; }
+
+.toc ul ul li { list-style: circle; }
+
+.note, .promo, .aside { border: 1px solid; border-radius: 4px; margin: 10px=
+ 0px; padding: 10px; }
+
+.note { background: rgb(255, 251, 228); border-color: rgb(248, 246, 230); }
+
+.promo { background: rgb(246, 249, 255); border-color: rgb(239, 242, 249); =
+}
+
+.aside { background: rgb(249, 249, 249); border-color: rgb(242, 242, 242); =
+}
+
+.note :first-child, .promo :first-child, .aside :first-child { margin-top: =
+0px; }
+
+.note p:last-child, .promo p:last-child, .aside p:last-child { margin-botto=
+m: 0px; }
+
+.cols { margin: 0px -1.533%; width: 103.067%; }
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .co=
+l-10, .col-11, .col-12 { display: inline-block; margin: 0px 1.488% 20px; ve=
+rtical-align: top; }
+
+.cols h1, .cols h2, .cols h3, .cols h4, .cols h5, .cols h6 { margin: 0.67em=
+ 0px; }
+
+.col-1 { width: 5.357%; }
+
+.col-2 { width: 13.69%; }
+
+.col-3 { width: 22.024%; }
+
+.col-4 { width: 30.357%; }
+
+.col-5 { width: 38.69%; }
+
+.col-6 { width: 47.024%; }
+
+.col-7 { width: 55.357%; }
+
+.col-8 { width: 63.69%; }
+
+.col-9 { width: 72.024%; }
+
+.col-10 { width: 80.357%; }
+
+.col-11 { width: 88.69%; }
+
+.col-12 { width: 97.024%; }
+
+.cols hr { width: 80%; }
+
+sentinel { }
+------MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://android.googlesource.com/+static/prettify/prettify.css
+
+@charset "utf-8";
+
+.str { color: rgb(0, 136, 0); }
+
+.kwd { color: rgb(0, 0, 136); }
+
+.com { color: rgb(136, 0, 0); }
+
+.typ { color: rgb(102, 0, 102); }
+
+.lit { color: rgb(0, 102, 102); }
+
+.pun, .opn, .clo { color: rgb(102, 102, 0); }
+
+.pln { color: rgb(0, 0, 0); }
+
+.tag { color: rgb(0, 0, 136); }
+
+.atn { color: rgb(102, 0, 102); }
+
+.atv { color: rgb(0, 136, 0); }
+
+.dec { color: rgb(102, 0, 102); }
+
+@media print {
+  .str { color: rgb(0, 102, 0); }
+  .kwd { color: rgb(0, 0, 102); font-weight: bold; }
+  .com { color: rgb(102, 0, 0); font-style: italic; }
+  .typ { color: rgb(68, 0, 68); font-weight: bold; }
+  .lit { color: rgb(0, 68, 68); }
+  .pun, .opn, .clo { color: rgb(68, 68, 0); }
+  .pln { color: rgb(0, 0, 0); }
+  .tag { color: rgb(0, 0, 102); font-weight: bold; }
+  .atn { color: rgb(68, 0, 68); }
+  .atv { color: rgb(0, 102, 0); }
+}
+
+pre.prettyprint { padding: 2px; border: 1px solid rgb(136, 136, 136); }
+
+ol.linenums { margin-top: 0px; margin-bottom: 0px; }
+
+li.L0, li.L1, li.L2, li.L3, li.L5, li.L6, li.L7, li.L8 { list-style-type: n=
+one; }
+
+li.L1, li.L3, li.L5, li.L7, li.L9 { background: rgb(238, 238, 238); }
+------MultipartBoundary--lURDCGcIo8pthGRgdsxbZj4Cyc6FTWAyZeEIANA1Gb------
