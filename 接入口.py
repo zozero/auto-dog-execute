@@ -15,8 +15,11 @@ from fastapi.responses import FileResponse
 from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
 
+from 数据类型屋.接收类型 import 任务数据类
 from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
+
+from 核心对象屋.执行对象 import 任务类
 
 # 使用网络地址访问执行端的入口
 快捷应用程序接口 = FastAPI()
@@ -80,6 +83,14 @@ def 图片匹配(模拟器的ip和端口: str, 范围: str):
     }
     返回值 = 匹配方法类.图片匹配(**参数字典)
     return ORJSONResponse(返回值.__dict__())
+
+
+@快捷应用程序接口.post("/测试/执行任务")
+def 执行任务(任务数据: 任务数据类):
+    # 使用类接收数据需要使用post方法
+    print(任务数据.模拟器的ip和端口)
+    任务 = 任务类(任务数据)
+    return '执行完毕'
 
 
 # uvicorn 接入口:快捷应用程序接口 --reload --port 8888

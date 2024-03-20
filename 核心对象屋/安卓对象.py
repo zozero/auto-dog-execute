@@ -35,7 +35,7 @@ class 安卓指令类:
         if len(输出) != 0 and 'connected' in 输出:
             print(self.__安卓连接地址 + '\t连接成功')
             self.__安卓调试桥路径 = self.__安卓调试桥路径 + "-s" + self.__空格 + self.__安卓连接地址 + self.__空格
-            输出 = self.__执行命令(命令)
+            # 输出 = self.__执行命令(命令)
         else:
             raise Exception(self.__安卓连接地址 + '\t连接失败')
 
