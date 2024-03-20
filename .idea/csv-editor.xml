@@ -17,7 +17,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\表格文件屋\测试项目\方法间\图片匹配方法.csv">
+        <entry key="\表格文件屋\测试项目\方法间\图片匹配.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -31,7 +31,7 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\表格文件屋\测试项目\步骤间\背包-步骤组.csv">
+        <entry key="\表格文件屋\测试项目\步骤间\背包.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
