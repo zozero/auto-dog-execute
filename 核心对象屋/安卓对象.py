@@ -42,14 +42,14 @@ class 安卓指令类:
         else:
             raise Exception(self.__安卓连接地址 + '\t连接失败')
 
-    def 敲击屏幕(self, 位置: tuple,**参数字典):
+    def 敲击屏幕(self, 位置: tuple, 休眠时间=0.8,**参数字典):
         if 位置 is not None and 位置 != '':
             x的增量, y的增量 = self.__计算增量()
             命令 = self.__安卓调试桥路径 + 'shell input tap' + self.__空格 + str(
                 x的增量 + 位置[0]) + self.__空格 + str(
                 y的增量 + 位置[1])
             self.__执行命令(命令)
-            # self.间隙时间(休眠时间)
+            self.间隙时间(休眠时间)
 
     def 滚动屏幕(self, 位置: tuple, 滚动量=(0, 20), 休眠时间=1.5,**参数字典):
         """
