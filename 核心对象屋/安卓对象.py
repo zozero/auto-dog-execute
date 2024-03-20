@@ -8,6 +8,9 @@ import cv2
 import numpy as np
 from PIL import Image
 
+from 数据类型屋.结果类型 import 结果类
+from 通用对象屋.委托对象 import 委托对象类
+
 
 # 这个类包含了各种各样的安卓指令，通过这些指令来完成指定任务。
 class 安卓指令类:
@@ -39,19 +42,19 @@ class 安卓指令类:
         else:
             raise Exception(self.__安卓连接地址 + '\t连接失败')
 
-    def 敲击屏幕(self, 点, 休眠时间=0.5):
-        if 点 is not None and 点 != '':
+    def 敲击屏幕(self, 位置: tuple,**参数字典):
+        if 位置 is not None and 位置 != '':
             x的增量, y的增量 = self.__计算增量()
             命令 = self.__安卓调试桥路径 + 'shell input tap' + self.__空格 + str(
-                x的增量 + 点[0]) + self.__空格 + str(
-                y的增量 + 点[1])
+                x的增量 + 位置[0]) + self.__空格 + str(
+                y的增量 + 位置[1])
             self.__执行命令(命令)
-            self.间隙时间(休眠时间)
+            # self.间隙时间(休眠时间)
 
-    def 滚动屏幕(self, 点, 滚动量=(0, 20), 休眠时间=1.5):
+    def 滚动屏幕(self, 位置: tuple, 滚动量=(0, 20), 休眠时间=1.5,**参数字典):
         """
 
-        :param 点: 按住的位置，例如(50,50)
+        :param 位置: 按住的位置，例如(50,50)
         :param 滚动量:
         :param 休眠时间:
         :return:
@@ -59,9 +62,9 @@ class 安卓指令类:
         if 滚动量 is not None and 滚动量 != '':
             x的增量, y的增量 = self.__计算增量()
             命令 = self.__安卓调试桥路径 + "shell input swipe" + self.__空格 + str(
-                x的增量 + 点[0]) + self.__空格 + str(
-                y的增量 + 点[1]) + self.__空格 + str(x的增量 + 点[0] + 滚动量[0]) + self.__空格 + str(
-                y的增量 + 点[1] + 滚动量[1])
+                x的增量 + 位置[0]) + self.__空格 + str(
+                y的增量 + 位置[1]) + self.__空格 + str(x的增量 + 位置[0] + 滚动量[0]) + self.__空格 + str(
+                y的增量 + 位置[1] + 滚动量[1])
             self.__执行命令(命令)
             self.间隙时间(休眠时间)
 
@@ -208,3 +211,19 @@ class 安卓指令类:
     @staticmethod
     def 间隙时间(时间=0.5):
         time.sleep(时间)
+
+
+class 安卓预处理类:
+    def __init__(self, 编码列表, 判断结果: 结果类):
+        self.编码列表 = 编码列表
+        self.判断结果 = 判断结果
+        self.参数字典 = {}
+        match 编码列表[0]:
+            case 'A':
+                self.预处理点击()
+            case 'B':
+                pass
+
+    def 预处理点击(self):
+        self.参数字典['行为函数'] = 委托对象类.字典['我的模拟器'].敲击屏幕
+        self.参数字典['位置'] = self.判断结果.位置

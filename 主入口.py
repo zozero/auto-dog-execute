@@ -1,9 +1,20 @@
-import re
-
-from 公共函数屋.字符转换 import 字符串转数字
-
+import pandas as pd
 # 按装订区域中的绿色按钮以运行脚本。
 if __name__ == '__main__':
-   数据列表=['1','2222','中文','1.0','asd','-1.0','-541']
-   数据列表2 =['asd','fs','中文']
-   print(list(map(字符串转数字,数据列表2)))
+
+    import re
+
+    # 假设我们要匹配一个点（.）
+    text = "This is a sentence This is another sentence"
+
+    # 正则表达式中点（.）需要转义
+    escaped_dot = "\."
+
+    # 使用re模块的search方法进行匹配
+    matches = re.search(escaped_dot, text)
+
+    # 如果匹配成功，打印匹配结果
+    if matches:
+        print("匹配成功:", matches.group())
+    else:
+        print("没有匹配到点（.）")

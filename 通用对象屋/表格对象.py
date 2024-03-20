@@ -1,21 +1,19 @@
-import csv
-
-from 公共函数屋.字符转换 import 字符串转数字
+import pandas as pd
+from pandas.core.indexing import _LocIndexer
 
 
 class 逗号分隔符类:
-
     def __init__(self, 完整文件路径: str):
         print("逗号分隔符类")
         self.完整文件路径 = 完整文件路径
-        self.文件数据列表 = []
-        self.打开文件()
+        self.文件数据表 = None
+        self.数据列表 = None
+        self.数据数量 = 0
+        self.索引列表 = []
+        self.读取数据()
 
-    def 打开文件(self):
-        # 之所以使用gbk是为了方便用excel打开csv文件
-        with open(self.完整文件路径, newline='', encoding='gbk') as 文件:
-            文件阅读器 = csv.reader(文件)
-            for 行 in 文件阅读器:
-                # 转换数据格式
-                新行 = list(map(字符串转数字, 行))
-                self.文件数据列表.append(新行)
+    def 读取数据(self):
+        self.文件数据表 = pd.read_csv(self.完整文件路径, index_col="序号", encoding='gbk', na_filter=False)
+        self.数据列表: _LocIndexer = self.文件数据表.loc
+        self.数据数量 = self.文件数据表.count()
+        self.索引列表 = self.文件数据表.index.tolist()
