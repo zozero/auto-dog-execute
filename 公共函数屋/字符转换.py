@@ -20,12 +20,12 @@ def 字符串转换(字符串) -> float | int | str | list:
     return 字符串
 
 
-def 动后编码转换(字符串) -> list:
-    正则结果 = re.findall(r"[a-zA-Z]|\d+", 字符串)
-    if 正则结果:
-        return [正则结果[0], int(正则结果[1]), 正则结果[2], int(正则结果[3])]
-    else:
-        return []
+def 编码转换(字符串) -> list:
+    正则结果 = re.findall(r"[A-Z]|\d+", 字符串)
+    新列表 = []
+    for 字符 in 正则结果:
+        新列表.append(字符串转换(字符))
+    return 新列表
 
 
 def 字典值转数字(字典):
