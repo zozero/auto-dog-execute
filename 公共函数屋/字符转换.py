@@ -17,8 +17,15 @@ def 字符串转换(字符串) -> float | int | str | list:
     if re.search(r"^\d+|^-\d+", 字符串):
         return int(字符串)
 
-
     return 字符串
+
+
+def 动后编码转换(字符串) -> list:
+    正则结果 = re.findall(r"[a-zA-Z]|\d+", 字符串)
+    if 正则结果:
+        return [正则结果[0], int(正则结果[1]), 正则结果[2], int(正则结果[3])]
+    else:
+        return []
 
 
 def 字典值转数字(字典):
