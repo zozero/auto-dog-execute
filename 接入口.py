@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import io
+import inspect
 import time
 import os
 import json
@@ -68,7 +69,8 @@ async def 上传图片匹配截图(图片: UploadFile, 项目名: str):
     with open(存储路径, 'wb') as 文件:
         文件内容 = await 图片.read()
         文件.write(文件内容)
-    return "保存成功"
+    函数名 = inspect.stack()[0][3]
+    return 函数名 + " 保存成功"
 
 
 # 保存数据到相应的csv表格中
@@ -89,7 +91,8 @@ async def 添加图片匹配数据(数据: 图片匹配数据类, 项目名: str
 
     表格 = 表格处理类(文件完整路径, 新字典)
     表格.添加数据()
-    return "保存成功"
+    函数名 = inspect.stack()[0][3]
+    return 函数名 + " 保存成功"
 
 
 @快捷应用程序接口.get("/测试/裁剪图片")

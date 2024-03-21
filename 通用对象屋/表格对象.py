@@ -31,7 +31,6 @@ class 表格处理类:
     def __init__(self, 完整路径, 一条数据: dict):
         self.完整路径 = 完整路径
         self.一条数据 = 一条数据
-        print(一条数据)
         self.数据数量 = 0
         self.数据表 = None
         self.读取数据表()
