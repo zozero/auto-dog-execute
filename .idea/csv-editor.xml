@@ -59,6 +59,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\表格文件屋\项目2\方法间\图片匹配.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
