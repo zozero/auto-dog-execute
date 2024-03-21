@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 from PIL import Image
 
+from 公共函数屋.字符转换 import 范围转换
 from 数据类型屋.结果类型 import 结果类
 from 通用对象屋.委托对象 import 委托对象类
 
@@ -42,7 +43,7 @@ class 安卓指令类:
         else:
             raise Exception(self.__安卓连接地址 + '\t连接失败')
 
-    def 敲击屏幕(self, 位置: tuple, 休眠时间=0.8,**参数字典):
+    def 敲击屏幕(self, 位置: tuple, 休眠时间=0.8, **参数字典):
         if 位置 is not None and 位置 != '':
             x的增量, y的增量 = self.__计算增量()
             命令 = self.__安卓调试桥路径 + 'shell input tap' + self.__空格 + str(
@@ -51,7 +52,7 @@ class 安卓指令类:
             self.__执行命令(命令)
             self.间隙时间(休眠时间)
 
-    def 滚动屏幕(self, 位置: tuple, 滚动量=(0, 20), 休眠时间=1.5,**参数字典):
+    def 滚动屏幕(self, 位置: tuple, 滚动量=(0, 20), 休眠时间=1.5, **参数字典):
         """
 
         :param 位置: 按住的位置，例如(50,50)
@@ -120,7 +121,6 @@ class 安卓指令类:
         图片 = Image.open(self.截屏())
         # 后续转成jpg格式，这样没有透明度
         图片 = 图片.convert('RGB')
-        # 裁剪图片
         图片 = 图片.crop(范围)
         # 保存是同步执行的，可能会导致阻塞
 
