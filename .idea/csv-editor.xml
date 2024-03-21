@@ -3,7 +3,21 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="\out.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\垃圾堆放屋\测试用任务.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\表格文件屋\测试\方法间\图片匹配.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -32,6 +46,13 @@
           </value>
         </entry>
         <entry key="\表格文件屋\测试项目\步骤间\背包.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\表格文件屋\项目1\方法间\图片匹配.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

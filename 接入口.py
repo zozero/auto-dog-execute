@@ -15,12 +15,14 @@ from fastapi.responses import FileResponse
 from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
 
-from 数据类型屋.接收类型 import 任务数据类
+from 公共函数屋.图片处理 import 保存图片
+from 数据类型屋.接收类型 import 任务数据类, 图片匹配数据类
 from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
 
 from 核心对象屋.执行对象 import 任务类
 from 通用对象屋.委托对象 import 委托对象类
+from 通用对象屋.表格对象 import 表格处理类
 
 # 使用网络地址访问执行端的入口
 快捷应用程序接口 = FastAPI()
@@ -53,6 +55,41 @@ def 模拟器屏幕(模拟器的ip和端口: str):
     我的模拟器 = 安卓指令类(模拟器的ip和端口)
     我的图片 = 我的模拟器.截屏()
     return StreamingResponse(我的图片, media_type="image/png")
+
+
+# 保存图片匹配的图片到相应文件夹中
+@快捷应用程序接口.post("/图片匹配/上传截图")
+async def 上传图片匹配截图(图片: UploadFile, 项目名: str):
+    目录路径 = os.path.join('图片存取屋', 项目名)
+    # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(目录路径, exist_ok=True)
+
+    存储路径 = os.path.join(目录路径, 图片.filename)
+    with open(存储路径, 'wb') as 文件:
+        文件内容 = await 图片.read()
+        文件.write(文件内容)
+    return "保存成功"
+
+
+# 保存数据到相应的csv表格中
+@快捷应用程序接口.post("/图片匹配/添加数据")
+async def 添加图片匹配数据(数据: 图片匹配数据类, 项目名: str):
+    print(数据.model_dump())
+    表格目录 = os.path.join('表格文件屋', 项目名, '方法间')
+    # # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+    #
+    # # 完整路径
+    文件完整路径 = os.path.join(表格目录, '图片匹配.csv')
+    # print(文件完整路径)
+    数据字典 = 数据.model_dump()
+    新字典 = {}
+    for 索引 in 数据字典.keys():
+        新字典[索引] = [数据字典[索引]]
+
+    表格 = 表格处理类(文件完整路径, 新字典)
+    表格.添加数据()
+    return "保存成功"
 
 
 @快捷应用程序接口.get("/测试/裁剪图片")
@@ -98,6 +135,7 @@ def 执行任务(任务数据: 任务数据类):
 
 
 # uvicorn 接入口:快捷应用程序接口 --reload --port 8888
+# pip install python-multipart 可能出现报错需要安卓
 if __name__ == "__main__":
     服务配置 = uvicorn.Config("接入口:快捷应用程序接口", port=8888, log_level="info", reload=True)
     服务 = uvicorn.Server(服务配置)
