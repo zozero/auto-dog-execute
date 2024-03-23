@@ -6,7 +6,7 @@ import os
 import json
 
 from PIL import Image
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile, HTTPException, status
 from typing import Union
 import uvicorn
 from fastapi.openapi.models import Response
@@ -17,7 +17,7 @@ from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
 
 from 公共函数屋.图片处理 import 保存图片
-from 数据类型屋.接收类型 import 任务数据类, 图片匹配数据类
+from 数据类型屋.接收类型 import 任务数据类, 图片匹配数据类, 图片二值化匹配数据类
 from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
 
@@ -59,8 +59,8 @@ def 模拟器屏幕(模拟器的ip和端口: str):
 
 
 # 保存图片匹配的图片到相应文件夹中
-@快捷应用程序接口.post("/图片匹配/上传截图")
-async def 上传图片匹配截图(图片: UploadFile, 项目名: str):
+@快捷应用程序接口.post("/方法/上传截图")
+async def 上传图片截图(图片: UploadFile, 项目名: str):
     目录路径 = os.path.join('图片存取屋', 项目名)
     # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(目录路径, exist_ok=True)
@@ -74,16 +74,14 @@ async def 上传图片匹配截图(图片: UploadFile, 项目名: str):
 
 
 # 保存数据到相应的csv表格中
-@快捷应用程序接口.post("/图片匹配/添加数据")
-async def 添加图片匹配数据(数据: 图片匹配数据类, 项目名: str):
-    print(数据.model_dump())
+@快捷应用程序接口.post("/方法/添加")
+async def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹配数据类], 项目名: str, 方法名: str):
     表格目录 = os.path.join('表格文件屋', 项目名, '方法间')
     # # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
-    #
-    # # 完整路径
-    文件完整路径 = os.path.join(表格目录, '图片匹配.csv')
-    # print(文件完整路径)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 方法名 + '.csv')
     数据字典 = 数据.model_dump()
     新字典 = {}
     for 索引 in 数据字典.keys():
@@ -94,6 +92,111 @@ async def 添加图片匹配数据(数据: 图片匹配数据类, 项目名: str
     函数名 = inspect.stack()[0][3]
     return 函数名 + " 保存成功"
 
+
+# 获取csv文件
+@快捷应用程序接口.put("/方法/覆盖")
+async def 覆盖方法表格(csv文件: UploadFile, 项目名: str, 方法名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '方法间')
+    # # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 方法名 + '.csv')
+    with open(文件完整路径, 'wb') as 文件:
+        文件内容 = await csv文件.read()
+        # 之所以如此麻烦的转换是因为，国内大部分使用excel打开csv文件，但excel不具备自动切换编码的功能
+        # 这就导致使用utf-8编码的文件直接出现乱码
+        文件内容 = 文件内容.decode(encoding='utf-8')
+        文件内容 = 文件内容.encode('gbk')
+        文件.write(文件内容)
+    return "保存成功"
+
+
+# 获取csv文件
+@快捷应用程序接口.get("/方法/表格")
+async def 获取表格(项目名: str, 文件名: str):
+    文件路径 = os.path.join('表格文件屋', 项目名, '方法间', 文件名 + '.csv')
+    if os.path.exists(文件路径):
+        return FileResponse(文件路径, media_type="csv/text")
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="表格文件没有找到！",
+        )
+
+
+@快捷应用程序接口.put("/步骤/创建")
+async def 创建步骤表格(csv文件: UploadFile, 项目名: str, 文件名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 文件名 + '.csv')
+    with open(文件完整路径, 'wb') as 文件:
+        文件内容 = await csv文件.read()
+        # 之所以如此麻烦的转换是因为，国内大部分使用excel打开csv文件，但excel不具备自动切换编码的功能
+        # 这就导致使用utf-8编码的文件直接出现乱码
+        文件内容 = 文件内容.decode(encoding='utf-8')
+        文件内容 = 文件内容.encode('gbk')
+        文件.write(文件内容)
+    return "创建步骤表格成功"
+
+
+@快捷应用程序接口.get("/步骤/文件列表")
+def 获得步骤文件列表(项目名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    if os.path.exists(表格目录):
+        文件列表 = os.listdir(表格目录)
+        return ORJSONResponse(文件列表)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="文件没有找到！",
+        )
+
+
+@快捷应用程序接口.delete("/步骤/删除文件")
+def 删除步骤文件(项目名: str, 文件名: str):
+    文件目录 = os.path.join('表格文件屋', 项目名, '步骤间', 文件名 + '.csv')
+    if os.path.exists(文件目录):
+        os.remove(文件目录)
+        return "删除成功"
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="文件没有找到！",
+        )
+
+
+@快捷应用程序接口.get("/步骤/表格")
+async def 获得步骤文件(项目名: str, 文件名: str):
+    文件路径 = os.path.join('表格文件屋', 项目名, '步骤间', 文件名 + '.csv')
+    print(文件路径)
+    if os.path.exists(文件路径):
+        return FileResponse(文件路径, media_type="csv/text")
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="表格文件没有找到！",
+        )
+
+@快捷应用程序接口.put("/步骤/覆盖")
+async def 覆盖步骤表格(csv文件: UploadFile, 项目名: str, 文件名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    # # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 文件名 + '.csv')
+    with open(文件完整路径, 'wb') as 文件:
+        文件内容 = await csv文件.read()
+        # 之所以如此麻烦的转换是因为，国内大部分使用excel打开csv文件，但excel不具备自动切换编码的功能
+        # 这就导致使用utf-8编码的文件直接出现乱码
+        文件内容 = 文件内容.decode(encoding='utf-8')
+        文件内容 = 文件内容.encode('gbk')
+        文件.write(文件内容)
+    return "保存成功"
 
 @快捷应用程序接口.get("/测试/裁剪图片")
 # def read_root(模拟器的ip和端口: Union[str, None] = None):
