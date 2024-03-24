@@ -47,9 +47,11 @@ class 表格处理类:
         self.数据数量 = len(self.数据表)
         if self.数据数量 > 0:
             self.序号尾巴 = self.数据表[-1:].index[0]
+        if self.序号尾巴 < self.数据数量:
+            self.序号尾巴 = self.数据数量
 
     def 添加数据(self):
-        if self.一条数据["序号"][0] is None or self.一条数据["序号"][0] == "":
+        if self.一条数据["序号"][0] is None or self.一条数据["序号"][0] == "" or self.一条数据["序号"][0] == 0:
             self.一条数据["序号"][0] = self.序号尾巴 + 1
         数据帧 = pd.DataFrame(self.一条数据)
         数据帧.to_csv(self.完整路径, mode='a', header=False, index=False, encoding=统一编码)

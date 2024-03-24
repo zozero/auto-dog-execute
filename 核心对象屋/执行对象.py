@@ -192,8 +192,8 @@ class 任务类:
         self.索引 = 1
         self.最终执行状态 = True
 
-        self.获取数据()
-        self.执行任务()
+        # self.获取数据()
+        # self.执行任务()
 
     def 获取数据(self):
         # 获取任务间的指定表格

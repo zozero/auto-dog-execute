@@ -17,7 +17,8 @@ from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
 
 from 公共函数屋.图片处理 import 保存图片
-from 数据类型屋.接收类型 import 任务数据类, 图片匹配数据类, 图片二值化匹配数据类
+from 公共函数屋.字符转换 import 字符串转换
+from 数据类型屋.接收类型 import 任务数据类, 图片匹配数据类, 图片二值化匹配数据类, 步骤数据类, 测试步骤数据类
 from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
 
@@ -181,6 +182,7 @@ async def 获得步骤文件(项目名: str, 文件名: str):
             detail="表格文件没有找到！",
         )
 
+
 @快捷应用程序接口.put("/步骤/覆盖")
 async def 覆盖步骤表格(csv文件: UploadFile, 项目名: str, 文件名: str):
     表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
@@ -197,6 +199,45 @@ async def 覆盖步骤表格(csv文件: UploadFile, 项目名: str, 文件名: s
         文件内容 = 文件内容.encode('gbk')
         文件.write(文件内容)
     return "保存成功"
+
+
+# 保存数据到相应的csv表格中
+@快捷应用程序接口.post("/步骤/添加")
+async def 添加步骤数据(数据: 步骤数据类, 项目名: str, 文件名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    # # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 文件名 + '.csv')
+    print(文件完整路径)
+    数据字典 = 数据.model_dump()
+    新字典 = {}
+    for 索引 in 数据字典.keys():
+        # 新字典[索引] = [字符串转换(数据字典[索引])
+        新字典[索引] = [数据字典[索引]]
+
+    表格 = 表格处理类(文件完整路径, 新字典)
+    表格.添加数据()
+    函数名 = inspect.stack()[0][3]
+    return 函数名 + " 保存成功"
+
+
+@快捷应用程序接口.post("/执行/测试步骤")
+async def 测试步骤(步骤数据: 测试步骤数据类):
+    # 使用类接收数据需要使用post方法
+    我的模拟器 = 安卓指令类(步骤数据.模拟器的ip和端口)
+    委托对象类.注册('我的模拟器', 我的模拟器)
+    任务 = 任务类(步骤数据.项目名, '')
+    步骤信息={
+        '名称': 步骤数据.名称,
+        '编号': 步骤数据.编号,
+    }
+    print(步骤信息)
+    任务.步骤(步骤信息)
+
+    return '执行完毕。'
+
 
 @快捷应用程序接口.get("/测试/裁剪图片")
 # def read_root(模拟器的ip和端口: Union[str, None] = None):
@@ -237,6 +278,9 @@ def 执行任务(任务数据: 任务数据类):
     委托对象类.注册('我的模拟器', 我的模拟器)
     for 任务名 in 任务数据.任务列表:
         任务 = 任务类(任务数据.项目名, 任务名)
+
+        任务.获取数据()
+        任务.执行任务()
     return '执行完毕'
 
 
