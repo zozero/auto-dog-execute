@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class 任务数据类(BaseModel):
+class 执行数据类(BaseModel):
     模拟器的ip和端口: str
     项目名: str
     任务列表: list
@@ -45,3 +45,11 @@ class 步骤数据类(BaseModel):
     动后编码: str
     循环次数: int
     循环间隔: float
+
+
+class 任务数据类(BaseModel):
+    序号: int| None = None
+    名称: str
+    编号: int
+    是: int
+    否: int

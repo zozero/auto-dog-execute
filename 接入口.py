@@ -15,10 +15,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from 公共函数屋.图片处理 import 保存图片
 from 公共函数屋.字符转换 import 字符串转换
-from 数据类型屋.接收类型 import 任务数据类, 图片匹配数据类, 图片二值化匹配数据类, 步骤数据类, 测试步骤数据类
+from 数据类型屋.接收类型 import 执行数据类, 图片匹配数据类, 图片二值化匹配数据类, 步骤数据类, 测试步骤数据类, 任务数据类
 from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
 
@@ -226,6 +227,89 @@ async def 添加步骤数据(数据: 步骤数据类, 项目名: str, 文件名:
 
     # 完整路径
     文件完整路径 = os.path.join(表格目录, 文件名 + '.csv')
+    数据字典 = 数据.model_dump()
+    新字典 = {}
+    for 索引 in 数据字典.keys():
+        # 新字典[索引] = [字符串转换(数据字典[索引])
+        新字典[索引] = [数据字典[索引]]
+
+    表格 = 表格处理类(文件完整路径, 新字典)
+    表格.添加数据()
+    函数名 = inspect.stack()[0][3]
+    return 函数名 + " 保存成功"
+
+
+@快捷应用程序接口.put("/任务/创建")
+async def 创建任务表格(csv文件: UploadFile, 项目名: str, 文件名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 文件名 + '.csv')
+    with open(文件完整路径, 'wb') as 文件:
+        文件内容 = await csv文件.read()
+        # 之所以如此麻烦的转换是因为，国内大部分使用excel打开csv文件，但excel不具备自动切换编码的功能
+        # 这就导致使用utf-8编码的文件直接出现乱码
+        文件内容 = 文件内容.decode(encoding='utf-8')
+        文件内容 = 文件内容.encode('gbk')
+        文件.write(文件内容)
+    return "创建步任务格成功"
+
+
+@快捷应用程序接口.get("/任务/文件列表")
+def 获得任务文件列表(项目名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    if os.path.exists(表格目录):
+        文件列表 = os.listdir(表格目录)
+        return ORJSONResponse(文件列表)
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="文件没有找到！",
+        )
+
+
+@快捷应用程序接口.get("/任务/表格")
+async def 获得任务文件(项目名: str, 文件名: str):
+    文件路径 = os.path.join('表格文件屋', 项目名, '任务间', 文件名 + '.csv')
+    print(文件路径)
+    if os.path.exists(文件路径):
+        return FileResponse(文件路径, media_type="csv/text")
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="表格文件没有找到！",
+        )
+
+
+@快捷应用程序接口.put("/任务/覆盖")
+async def 覆盖任务表格(csv文件: UploadFile, 项目名: str, 文件名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    # # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 文件名 + '.csv')
+    with open(文件完整路径, 'wb') as 文件:
+        文件内容 = await csv文件.read()
+        # 之所以如此麻烦的转换是因为，国内大部分使用excel打开csv文件，但excel不具备自动切换编码的功能
+        # 这就导致使用utf-8编码的文件直接出现乱码
+        文件内容 = 文件内容.decode(encoding='utf-8')
+        文件内容 = 文件内容.encode('gbk')
+        文件.write(文件内容)
+    return "保存成功"
+
+
+# 保存数据到相应的csv表格中
+@快捷应用程序接口.post("/任务/添加")
+async def 添加任务数据(数据: 任务数据类, 项目名: str, 文件名: str):
+    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    # # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 文件名 + '.csv')
     print(文件完整路径)
     数据字典 = 数据.model_dump()
     新字典 = {}
@@ -237,6 +321,19 @@ async def 添加步骤数据(数据: 步骤数据类, 项目名: str, 文件名:
     表格.添加数据()
     函数名 = inspect.stack()[0][3]
     return 函数名 + " 保存成功"
+
+
+@快捷应用程序接口.delete("/任务/删除文件")
+def 删除任务文件(项目名: str, 文件名: str):
+    文件目录 = os.path.join('表格文件屋', 项目名, '任务间', 文件名 + '.csv')
+    if os.path.exists(文件目录):
+        os.remove(文件目录)
+        return "删除成功"
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="文件没有找到！",
+        )
 
 
 @快捷应用程序接口.post("/执行/测试步骤")
@@ -287,7 +384,7 @@ def 图片匹配(模拟器的ip和端口: str, 范围: str):
 
 
 @快捷应用程序接口.post("/测试/执行任务")
-def 执行任务(任务数据: 任务数据类):
+def 执行任务(任务数据: 执行数据类):
     # 使用类接收数据需要使用post方法
     print(任务数据.模拟器的ip和端口)
     我的模拟器 = 安卓指令类(任务数据.模拟器的ip和端口)
