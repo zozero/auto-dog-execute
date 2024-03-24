@@ -29,7 +29,7 @@ class 表格处理类:
     确保每个表格都会有序号
     """
 
-    def __init__(self, 完整路径, 一条数据: dict):
+    def __init__(self, 完整路径, 一条数据: dict = None):
         self.完整路径 = 完整路径
         self.一条数据 = 一条数据
         self.数据数量 = 0

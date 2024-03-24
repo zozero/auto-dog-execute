@@ -126,6 +126,22 @@ async def 获取表格(项目名: str, 文件名: str):
         )
 
 
+# 获取csv文件
+@快捷应用程序接口.get("/方法/序号尾巴")
+async def 获得序号尾巴(项目名: str, 文件名: str):
+    文件路径 = os.path.join('表格文件屋', 项目名, '方法间', 文件名 + '.csv')
+    print(文件路径)
+    if os.path.exists(文件路径):
+        表格 = 表格处理类(文件路径)
+        # fastapi无法直接返回numpy.*的数据，所以添加了item来转换成 python 类型
+        return 表格.序号尾巴.item()
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="表格文件没有找到！",
+        )
+
+
 @快捷应用程序接口.put("/步骤/创建")
 async def 创建步骤表格(csv文件: UploadFile, 项目名: str, 文件名: str):
     表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
@@ -228,12 +244,12 @@ async def 测试步骤(步骤数据: 测试步骤数据类):
     # 使用类接收数据需要使用post方法
     我的模拟器 = 安卓指令类(步骤数据.模拟器的ip和端口)
     委托对象类.注册('我的模拟器', 我的模拟器)
+    # 任务名为空，因为不是必须的
     任务 = 任务类(步骤数据.项目名, '')
-    步骤信息={
+    步骤信息 = {
         '名称': 步骤数据.名称,
         '编号': 步骤数据.编号,
     }
-    print(步骤信息)
     任务.步骤(步骤信息)
 
     return '执行完毕。'
