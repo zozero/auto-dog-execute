@@ -117,9 +117,10 @@ async def 覆盖方法表格(csv文件: UploadFile, 项目名: str, 方法名: s
 # 获取csv文件
 @快捷应用程序接口.get("/方法/表格")
 async def 获取表格(项目名: str, 文件名: str):
-    文件路径 = os.path.join('表格文件屋', 项目名, '方法间', 文件名 + '.csv')
+    文件名 = 文件名 + '.csv'
+    文件路径 = os.path.join('表格文件屋', 项目名, '方法间', 文件名)
     if os.path.exists(文件路径):
-        return FileResponse(文件路径, media_type="csv/text")
+        return FileResponse(文件路径, media_type="csv/text", filename=文件名)
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -189,10 +190,11 @@ def 删除步骤文件(项目名: str, 文件名: str):
 
 @快捷应用程序接口.get("/步骤/表格")
 async def 获得步骤文件(项目名: str, 文件名: str):
-    文件路径 = os.path.join('表格文件屋', 项目名, '步骤间', 文件名 + '.csv')
+    文件名 = 文件名 + '.csv'
+    文件路径 = os.path.join('表格文件屋', 项目名, '步骤间', 文件名)
     print(文件路径)
     if os.path.exists(文件路径):
-        return FileResponse(文件路径, media_type="csv/text")
+        return FileResponse(文件路径, media_type="csv/text", filename=文件名)
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -272,10 +274,11 @@ def 获得任务文件列表(项目名: str):
 
 @快捷应用程序接口.get("/任务/表格")
 async def 获得任务文件(项目名: str, 文件名: str):
-    文件路径 = os.path.join('表格文件屋', 项目名, '任务间', 文件名 + '.csv')
+    文件名 = 文件名 + '.csv'
+    文件路径 = os.path.join('表格文件屋', 项目名, '任务间', 文件名)
     print(文件路径)
     if os.path.exists(文件路径):
-        return FileResponse(文件路径, media_type="csv/text")
+        return FileResponse(文件路径, media_type="csv/text", filename=文件名)
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
