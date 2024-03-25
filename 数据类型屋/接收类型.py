@@ -7,6 +7,12 @@ class 执行数据类(BaseModel):
     任务列表: list
 
 
+class 测试任务数据类(BaseModel):
+    模拟器的ip和端口: str
+    项目名: str
+    任务名: str
+
+
 # 用于测试单个步骤的数据类型
 class 测试步骤数据类(BaseModel):
     模拟器的ip和端口: str
@@ -48,7 +54,7 @@ class 步骤数据类(BaseModel):
 
 
 class 任务数据类(BaseModel):
-    序号: int| None = None
+    序号: int | None = None
     名称: str
     编号: int
     是: int

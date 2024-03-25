@@ -2,7 +2,8 @@ import re
 
 
 def 字符串转换(字符串) -> float | int | str | list:
-    字符串 = 字符串.strip()
+    if 字符串:
+        字符串 = 字符串.strip()
 
     if re.search(r"^[A-Z]+\d+", 字符串):
         数据列表 = [
