@@ -3,27 +3,27 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/out.csv" charset="GBK" />
     <file url="file://$PROJECT_DIR$/垃圾堆放屋/测试用任务.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/测试/方法间/图片匹配.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/测试项目/任务间/测试用任务.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/测试项目/方法间/图片匹配.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/测试项目/步骤间/冒险.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/测试项目/步骤间/背包.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目1/方法间/图片匹配.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目1/步骤间/123.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目1/步骤间/321.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目1/步骤间/456.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目2/任务间/临时任务.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目2/任务间/测试用任务.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目2/方法间/图片匹配.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目2/步骤间/冒险.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目2/步骤间/图片匹配.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目2/步骤间/测试.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目2/步骤间/背包.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目4/任务间/释放空间.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目4/任务间/释放空间2.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目4/步骤间/测试步骤.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目6/任务间/测试啊.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目6/方法间/图片匹配.csv" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/表格文件屋/项目6/步骤间/123.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/测试/方法间/图片匹配.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/测试项目/任务间/测试用任务.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/测试项目/方法间/图片匹配.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/测试项目/步骤间/冒险.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/测试项目/步骤间/背包.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目1/方法间/图片匹配.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目1/步骤间/123.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目1/步骤间/321.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目1/步骤间/456.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目2/任务间/临时任务.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目2/任务间/测试用任务.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目2/方法间/图片匹配.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目2/步骤间/冒险.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目2/步骤间/图片匹配.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目2/步骤间/测试.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目2/步骤间/背包.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目4/任务间/释放空间.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目4/任务间/释放空间2.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目4/步骤间/测试步骤.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目6/任务间/测试啊.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目6/方法间/图片匹配.csv" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/项目文件屋/项目6/步骤间/123.csv" charset="GBK" />
   </component>
 </project>

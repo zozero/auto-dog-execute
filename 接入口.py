@@ -63,30 +63,23 @@ def 模拟器屏幕(模拟器的ip和端口: str):
 
 @快捷应用程序接口.get("/配置/修改项目名")
 def 修改项目名(项目名: str, 新名字: str):
-    表格目录路径 = os.path.join('表格文件屋', 项目名, )
-    新表格目录路径 = os.path.join('表格文件屋', 新名字, )
+    表格目录路径 = os.path.join('项目文件屋', 项目名, )
+    新表格目录路径 = os.path.join('项目文件屋', 新名字, )
     if os.path.exists(表格目录路径) and os.path.exists(新表格目录路径) is False:
         os.rename(表格目录路径, 新表格目录路径)
+        return '修改目录完成。'
     else:
         return '修改目录失败，可能是不存在该目录或新目录名已存在。'
-
-    图片目录路径 = os.path.join('图片存取屋', 项目名, )
-    新图片目录路径 = os.path.join('图片存取屋', 新名字, )
-    if os.path.exists(图片目录路径) and os.path.exists(新图片目录路径) is False:
-        os.rename(图片目录路径, 新图片目录路径)
-    else:
-        return '修改目录失败，可能是不存在该目录或新目录名已存在。'
-
-    return '修改目录完成。'
 
 
 # 保存图片匹配的图片到相应文件夹中
 @快捷应用程序接口.post("/方法/上传截图")
 async def 上传图片截图(图片: UploadFile, 项目名: str):
-    目录路径 = os.path.join('图片存取屋', 项目名)
+    目录路径 = os.path.join('项目文件屋', 项目名, '图片间')
     # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(目录路径, exist_ok=True)
 
+    # 前端会直接指定图片名的
     存储路径 = os.path.join(目录路径, 图片.filename)
     with open(存储路径, 'wb') as 文件:
         文件内容 = await 图片.read()
@@ -98,7 +91,7 @@ async def 上传图片截图(图片: UploadFile, 项目名: str):
 # 保存数据到相应的csv表格中
 @快捷应用程序接口.post("/方法/添加")
 def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹配数据类], 项目名: str, 方法名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '方法间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
     # # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -118,7 +111,7 @@ def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹�
 # 获取csv文件
 @快捷应用程序接口.put("/方法/覆盖")
 async def 覆盖方法表格(csv文件: UploadFile, 项目名: str, 方法名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '方法间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
     # # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -138,7 +131,7 @@ async def 覆盖方法表格(csv文件: UploadFile, 项目名: str, 方法名: s
 @快捷应用程序接口.get("/方法/表格")
 def 获取表格(项目名: str, 文件名: str):
     文件名 = 文件名 + '.csv'
-    文件路径 = os.path.join('表格文件屋', 项目名, '方法间', 文件名)
+    文件路径 = os.path.join('项目文件屋', 项目名, '方法间', 文件名)
     if os.path.exists(文件路径):
         return FileResponse(文件路径, media_type="csv/text", filename=文件名)
     else:
@@ -151,7 +144,7 @@ def 获取表格(项目名: str, 文件名: str):
 # 获取csv文件最后一行数据的序号
 @快捷应用程序接口.get("/方法/序号尾巴")
 def 获得序号尾巴(项目名: str, 文件名: str):
-    文件路径 = os.path.join('表格文件屋', 项目名, '方法间', 文件名 + '.csv')
+    文件路径 = os.path.join('项目文件屋', 项目名, '方法间', 文件名 + '.csv')
     print(文件路径)
     if os.path.exists(文件路径):
         表格 = 表格处理类(文件路径)
@@ -166,7 +159,7 @@ def 获得序号尾巴(项目名: str, 文件名: str):
 
 @快捷应用程序接口.put("/步骤/创建")
 async def 创建步骤表格(csv文件: UploadFile, 项目名: str, 文件名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '步骤间')
     # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -184,7 +177,7 @@ async def 创建步骤表格(csv文件: UploadFile, 项目名: str, 文件名: s
 
 @快捷应用程序接口.get("/步骤/文件列表")
 def 获得步骤文件列表(项目名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '步骤间')
     if os.path.exists(表格目录):
         文件列表 = os.listdir(表格目录)
         return ORJSONResponse(文件列表)
@@ -197,7 +190,7 @@ def 获得步骤文件列表(项目名: str):
 
 @快捷应用程序接口.delete("/步骤/删除文件")
 def 删除步骤文件(项目名: str, 文件名: str):
-    文件目录 = os.path.join('表格文件屋', 项目名, '步骤间', 文件名 + '.csv')
+    文件目录 = os.path.join('项目文件屋', 项目名, '步骤间', 文件名 + '.csv')
     if os.path.exists(文件目录):
         os.remove(文件目录)
         return "删除成功"
@@ -211,7 +204,7 @@ def 删除步骤文件(项目名: str, 文件名: str):
 @快捷应用程序接口.get("/步骤/表格")
 def 获得步骤文件(项目名: str, 文件名: str):
     文件名 = 文件名 + '.csv'
-    文件路径 = os.path.join('表格文件屋', 项目名, '步骤间', 文件名)
+    文件路径 = os.path.join('项目文件屋', 项目名, '步骤间', 文件名)
     if os.path.exists(文件路径):
         return FileResponse(文件路径, media_type="csv/text", filename=文件名)
     else:
@@ -223,7 +216,7 @@ def 获得步骤文件(项目名: str, 文件名: str):
 
 @快捷应用程序接口.put("/步骤/覆盖")
 async def 覆盖步骤表格(csv文件: UploadFile, 项目名: str, 文件名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '步骤间')
     # # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -242,7 +235,7 @@ async def 覆盖步骤表格(csv文件: UploadFile, 项目名: str, 文件名: s
 # 保存数据到相应的csv表格中
 @快捷应用程序接口.post("/步骤/添加")
 def 添加步骤数据(数据: 步骤数据类, 项目名: str, 文件名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '步骤间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '步骤间')
     # # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -263,7 +256,7 @@ def 添加步骤数据(数据: 步骤数据类, 项目名: str, 文件名: str):
 # 获取csv文件最后一行数据的序号
 @快捷应用程序接口.get("/步骤/序号尾巴")
 def 获得步骤尾巴(项目名: str, 文件名: str):
-    文件路径 = os.path.join('表格文件屋', 项目名, '步骤间', 文件名 + '.csv')
+    文件路径 = os.path.join('项目文件屋', 项目名, '步骤间', 文件名 + '.csv')
     if os.path.exists(文件路径):
         表格 = 表格处理类(文件路径)
         # fastapi无法直接返回numpy.*的数据，所以添加了item来转换成 python 类型
@@ -277,7 +270,7 @@ def 获得步骤尾巴(项目名: str, 文件名: str):
 
 @快捷应用程序接口.put("/任务/创建")
 async def 创建任务表格(csv文件: UploadFile, 项目名: str, 文件名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '任务间')
     # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -295,7 +288,7 @@ async def 创建任务表格(csv文件: UploadFile, 项目名: str, 文件名: s
 
 @快捷应用程序接口.get("/任务/文件列表")
 def 获得任务文件列表(项目名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '任务间')
     if os.path.exists(表格目录):
         文件列表 = os.listdir(表格目录)
         return ORJSONResponse(文件列表)
@@ -309,7 +302,7 @@ def 获得任务文件列表(项目名: str):
 @快捷应用程序接口.get("/任务/表格")
 def 获得任务文件(项目名: str, 文件名: str):
     文件名 = 文件名 + '.csv'
-    文件路径 = os.path.join('表格文件屋', 项目名, '任务间', 文件名)
+    文件路径 = os.path.join('项目文件屋', 项目名, '任务间', 文件名)
     print(文件路径)
     if os.path.exists(文件路径):
         return FileResponse(文件路径, media_type="csv/text", filename=文件名)
@@ -322,7 +315,7 @@ def 获得任务文件(项目名: str, 文件名: str):
 
 @快捷应用程序接口.put("/任务/覆盖")
 async def 覆盖任务表格(csv文件: UploadFile, 项目名: str, 文件名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '任务间')
     # # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -341,7 +334,7 @@ async def 覆盖任务表格(csv文件: UploadFile, 项目名: str, 文件名: s
 # 保存数据到相应的csv表格中
 @快捷应用程序接口.post("/任务/添加")
 def 添加任务数据(数据: 任务数据类, 项目名: str, 文件名: str):
-    表格目录 = os.path.join('表格文件屋', 项目名, '任务间')
+    表格目录 = os.path.join('项目文件屋', 项目名, '任务间')
     # # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
@@ -362,7 +355,7 @@ def 添加任务数据(数据: 任务数据类, 项目名: str, 文件名: str):
 
 @快捷应用程序接口.delete("/任务/删除文件")
 def 删除任务文件(项目名: str, 文件名: str):
-    文件目录 = os.path.join('表格文件屋', 项目名, '任务间', 文件名 + '.csv')
+    文件目录 = os.path.join('项目文件屋', 项目名, '任务间', 文件名 + '.csv')
     if os.path.exists(文件目录):
         os.remove(文件目录)
         return "删除成功"
@@ -425,7 +418,7 @@ def 图片匹配(模拟器的ip和端口: str, 范围: str):
     我的图片路径, 我的图片 = 我的模拟器.裁剪图片(范围)
     参数字典 = {
         "新图": 我的图片,
-        "旧图路径": os.path.join('图片存取屋', '测试项目', '应用中心.jpg'),
+        "旧图路径": os.path.join('项目文件屋', '测试项目', '图片间', '应用中心.jpg'),
         '算法': 5,
         '最低相似度': 0.8,
         '额外补充': 0
