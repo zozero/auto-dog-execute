@@ -80,7 +80,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\项目文件屋\项目1\任务间\位置信息.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\项目文件屋\项目1\步骤间\临时测试.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\项目文件屋\项目3\方法间\图片匹配.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
