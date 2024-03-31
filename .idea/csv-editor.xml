@@ -80,6 +80,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\项目文件屋\项目1\步骤间\临时测试.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
