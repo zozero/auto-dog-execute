@@ -53,22 +53,32 @@ class 安卓指令类:
             self.__执行命令(命令)
             self.间隙时间(休眠时间)
 
-    def 滚动屏幕(self, 位置: tuple, 滚动量=(0, 20), 休眠时间=1.5, **参数字典):
+    def 滑动屏幕(self, 位置: tuple, 滑动量=(0, 20), 休眠时间=1.5, **参数字典):
         """
 
         :param 位置: 按住的位置，例如(50,50)
-        :param 滚动量:
+        :param 滑动量:
         :param 休眠时间:
         :return:
         """
-        if 滚动量 is not None and 滚动量 != '':
+        if 滑动量 is not None and 滑动量 != '':
             x的增量, y的增量 = self.__计算增量()
             命令 = self.__安卓调试桥路径 + "shell input swipe" + self.__空格 + str(
                 x的增量 + 位置[0]) + self.__空格 + str(
-                y的增量 + 位置[1]) + self.__空格 + str(x的增量 + 位置[0] + 滚动量[0]) + self.__空格 + str(
-                y的增量 + 位置[1] + 滚动量[1])
+                y的增量 + 位置[1]) + self.__空格 + str(x的增量 + 位置[0] + 滑动量[0]) + self.__空格 + str(
+                y的增量 + 位置[1] + 滑动量[1])
             self.__执行命令(命令)
             self.间隙时间(休眠时间)
+
+    def 返回(self, 休眠时间=0.8, **参数字典):
+        命令 = self.__安卓调试桥路径 + "shell input keyevent KEYCODE_BACK"
+        self.__执行命令(命令)
+        self.间隙时间(休眠时间)
+
+    def 主界面(self, 休眠时间=0.8, **参数字典):
+        命令 = self.__安卓调试桥路径 + "shell input keyevent KEYCODE_HOME"
+        self.__执行命令(命令)
+        self.间隙时间(休眠时间)
 
     def __计算增量(self):
         """
@@ -89,7 +99,7 @@ class 安卓指令类:
         """
         直接启动游戏
         运行adb shell dumpsys window | findstr mCurrentFocus 用于查找应用启动入口
-        :param 游戏启动名: 例如："com.stove.epic7.google/kr.supercreative.epic7.AppActivity"
+        :param 游戏启动名:
         :param 休眠时间:
         :return:
         """
@@ -224,8 +234,33 @@ class 安卓预处理类:
             case 'A':
                 self.预处理点击()
             case 'B':
-                pass
+                self.预处理滑动()
+            case 'C':
+                self.预处理返回()
+            case 'D':
+                self.预处理主界面()
 
     def 预处理点击(self):
         self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].敲击屏幕
+        self.参数字典['位置'] = self.判断结果.位置
+
+    def 预处理滑动(self):
+        print(self.编码列表)
+        self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].滑动屏幕
+        self.参数字典['位置'] = self.判断结果.位置
+        滑动量 = [0, 0]
+        if len(self.编码列表) == 2:
+            滑动量 = [self.编码列表[1], self.编码列表[1]]
+        elif self.编码列表[2] == 'X':
+            滑动量[0] = self.编码列表[1]
+        elif self.编码列表[2] == 'Y':
+            滑动量[1] = self.编码列表[1]
+        self.参数字典['滑动量'] = tuple(滑动量)
+
+    def 预处理返回(self):
+        self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].返回
+        self.参数字典['位置'] = self.判断结果.位置
+
+    def 预处理主界面(self):
+        self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].主界面
         self.参数字典['位置'] = self.判断结果.位置
