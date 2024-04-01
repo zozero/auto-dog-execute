@@ -42,6 +42,17 @@ class 图片二值化匹配数据类(BaseModel):
     最低相似度: float
 
 
+class 匹配再匹配数据类(BaseModel):
+    序号: int | None = None
+    编码: str
+    图片名: str
+    X偏移: int
+    Y偏移: int
+    算法: int
+    最低相似度: float
+    额外补充: int
+
+
 class 步骤数据类(BaseModel):
     序号: int | None = None
     名称: str

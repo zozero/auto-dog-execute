@@ -11,6 +11,7 @@ from PIL import Image
 from 公共函数屋.字符转换 import 范围转换
 from 数据类型屋.结果类型 import 结果类
 from 通用对象屋.委托对象 import 委托对象类
+from 通用对象屋.消息对象 import 消息提示类
 
 
 # 这个类包含了各种各样的安卓指令，通过这些指令来完成指定任务。
@@ -109,7 +110,7 @@ class 安卓指令类:
         else:
             return 输出[-1] - self.__刘海高度, 输出[-2]
 
-    def 裁剪图片(self, 范围=(0, 0, -1, -1), 完整相对路径='垃圾堆放屋/临时', 是否保存=True):
+    def 裁剪图片(self, 范围=(0, 0, 10, 10), 完整相对路径='垃圾堆放屋/临时', 是否保存=True):
         # 将图片转换成opencv专用的格式后，在转成opencv的格式不过这个图片是BGR的顺序的。
         # 现在是多次一举的。暂时注释，后期可能删除。
         # 图片 = cv.imdecode(np.asarray(bytearray(输出), dtype=np.uint8), cv.IMREAD_COLOR)
