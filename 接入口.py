@@ -6,8 +6,8 @@ import os
 import json
 
 from PIL import Image
-from fastapi import FastAPI, UploadFile, HTTPException, status
-from typing import Union
+from fastapi import FastAPI, UploadFile, HTTPException, status, File
+from typing import Union, Annotated
 import uvicorn
 from fastapi.openapi.models import Response
 from pydantic import BaseModel
@@ -17,7 +17,7 @@ from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from 公共函数屋.图片处理 import 保存图片
+from 公共函数屋.图片处理 import 保存图片, 上传图转二值图片
 from 公共函数屋.字符转换 import 字符串转换
 from 数据类型屋.接收类型 import 执行数据类, 图片匹配数据类, 图片二值化匹配数据类, 步骤数据类, 测试步骤数据类, \
     任务数据类, 测试任务数据类
@@ -91,11 +91,18 @@ async def 上传图片截图(图片: UploadFile, 项目名: str):
     return 函数名 + " 保存成功"
 
 
+@快捷应用程序接口.post("/方法/二值转化")
+async def 二值转化图片(图片: UploadFile, 阈值: int, 阈值类型: int):
+    图片内容 = await 图片.read()
+    图片 = 上传图转二值图片(图片内容, 阈值, 阈值类型)
+    return StreamingResponse(图片, media_type="image/jpg")
+
+
 # 保存数据到相应的csv表格中
 @快捷应用程序接口.post("/方法/添加")
 def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹配数据类], 项目名: str, 方法名: str):
     表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
-    # # 不存在目录就创建目录，存在的话就不要报错了
+    # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
     # 完整路径
@@ -115,7 +122,7 @@ def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹�
 @快捷应用程序接口.put("/方法/覆盖")
 async def 覆盖方法表格(csv文件: UploadFile, 项目名: str, 方法名: str):
     表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
-    # # 不存在目录就创建目录，存在的话就不要报错了
+    # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
 
     # 完整路径

@@ -87,5 +87,18 @@ class 计算机可视化开源类:
         return 灰度图数组
 
     @staticmethod
+    def 二值化图片(图片数组, 阈值, 最大值=255, 阈值类型=cv2.THRESH_BINARY):
+        """
+        :param 图片数组:
+        :param 阈值:
+        :param 最大值:
+        :param 阈值类型: https://docs.opencv.org/4.5.5/d7/d1b/group__imgproc__misc.html#gaa9e58d2860d4afa658ef70a9b1115576
+        :return:
+        """
+        灰度图数组 = 计算机可视化开源类.转成灰度图(图片数组)
+        二值化 = cv2.threshold(灰度图数组, 阈值, 最大值, 阈值类型)[1]
+        return 二值化
+
+    @staticmethod
     def test(参数):
         print(参数, " 这是用来测试的函数")
