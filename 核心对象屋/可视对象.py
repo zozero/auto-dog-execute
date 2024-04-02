@@ -20,7 +20,7 @@ class 计算机可视化开源类:
                     cv.TM_SQDIFF_NORMED
                     cv.TM_CCORR_NORMED
                     cv.TM_CCOEFF_NORMED
-                    链接：https://docs.opencv.org/3.0-beta/modules/imgproc/doc/object_detection.html?highlight=matchtemplate#cv.matchTemplate
+                    链接：https://docs.opencv.org/4.x/df/dfb/group__imgproc__object.html#ga586ebfb0a7fb604b35a23d85391329be
         :param 最低相似度: 对于相似度的最低要求
         :param 补充判断: 0 不补充    1 结构相似度
         :return: 返回结果类

@@ -8,10 +8,8 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from 公共函数屋.字符转换 import 范围转换
 from 数据类型屋.结果类型 import 结果类
 from 通用对象屋.委托对象 import 委托对象类
-from 通用对象屋.消息对象 import 消息提示类
 
 
 # 这个类包含了各种各样的安卓指令，通过这些指令来完成指定任务。
