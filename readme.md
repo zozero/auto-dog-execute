@@ -72,6 +72,10 @@ $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 
 ## 视频教程
 
+<div style="display:flex">
+  <iframe style="margin-right:30px" width="560" height="315" src="//player.bilibili.com/player.html?aid=1002606941&bvid=BV1jx4y1v7is&cid=1492745193&p=1"  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen> 
+  </iframe>
+</div>
 
 ## 文件说明
 
