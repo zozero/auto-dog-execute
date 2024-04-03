@@ -13,6 +13,33 @@
 - 希望它能够对你生活有所帮助。
 
 ## 安装
+
+### 方法一
+
+这是最简单的方法，你只需要点击下载[百度网盘]()里的`自动化小犬完整版.zip`文件就可以直接使用。
+
+解压后双击运行`接入口.exe`，然后在双击运行`自动化小犬.exe`，最后打开你的模拟器。
+
+如果你打算在其他地方下载的话，点击[谷歌]()。
+
+### 方法二
+下载源代码
+```bash
+$ git clone https://github.com/zozero/auto-dog-execute.git
+```
+进入目录
+```bash
+$ cd auto-dog-execute 
+```
+点击[这里]()下载已经打包的exe文件，点击[百度网盘]()，也可以下载需要的文件。
+
+将下载好的`接入口.exe`文件复制到`auto-dog-execute`目录中，然后双击运行。默认是本地的地址：`127.0.0.1:8888`。
+
+##### 额外
+
+你可以打开cmd命令行，这样你可以添加两个参数，例如：`接入口.exe 127.0.0.1 8866`，其中第一个参数`127.0.0.1`是启动地址，第二个`8866`是端口。它们用空格隔开。
+
+### 方法三
 首先前往这里下载[python conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html)，直接下载这个版本<b>Anaconda Distribution installer for Windows</b>
 
 然后前往这里[下载编辑器](https://www.jetbrains.com/pycharm/download/?section=windows)，网页下面有社区版的下载地址，我们下载的是社区版，它已经足够用了。
@@ -32,8 +59,6 @@ $ pip install -r requirements.txt
 ```bash
 $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 ```
-
-其他操作请看视频，用文字实在无法面面俱到。
 
 ## 视频教程
 
@@ -61,6 +86,10 @@ $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 ```bash
 $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 ```
+
+## 分享
+
+你可以分享你的项目，你只需要复制`项目文件屋`目录的文件夹，整个目录复制到你的好友电脑里面，在放置到`项目文件屋`里面，就可以正常使用了。
 
 
 ## 注意

@@ -1,24 +1,18 @@
 # -*- coding: utf-8 -*-
-import io
 import inspect
-import time
+import sys
 import os
-import json
 
-from PIL import Image
-from fastapi import FastAPI, UploadFile, HTTPException, status, File
-from typing import Union, Annotated
+from fastapi import FastAPI, UploadFile, HTTPException, status
+from typing import Union
 import uvicorn
-from fastapi.openapi.models import Response
-from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from 公共函数屋.图片处理 import 保存图片, 上传图转二值图片
-from 公共函数屋.字符转换 import 字符串转换
+from 公共函数屋.图片处理 import 上传图转二值图片
 from 数据类型屋.接收类型 import 执行数据类, 图片匹配数据类, 图片二值化匹配数据类, 步骤数据类, 测试步骤数据类, \
     任务数据类, 测试任务数据类, 匹配再匹配数据类, 无图匹配数据类
 from 核心对象屋.安卓对象 import 安卓指令类
@@ -27,6 +21,10 @@ from 核心对象屋.方法对象 import 匹配方法类
 from 核心对象屋.执行对象 import 任务类
 from 通用对象屋.委托对象 import 委托对象类
 from 通用对象屋.表格对象 import 表格处理类
+
+# 用于打包后防止报错
+根路径 = os.getcwd()
+sys.path.append(根路径)
 
 # 使用网络地址访问执行端的入口
 快捷应用程序接口 = FastAPI()
@@ -100,7 +98,8 @@ async def 二值转化图片(图片: UploadFile, 阈值: int, 阈值类型: int)
 
 # 保存数据到相应的csv表格中
 @快捷应用程序接口.post("/方法/添加")
-def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹配数据类, 匹配再匹配数据类, 无图匹配数据类], 项目名: str, 方法名: str):
+def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹配数据类, 匹配再匹配数据类, 无图匹配数据类], 项目名: str,
+                 方法名: str):
     表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
     # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(表格目录, exist_ok=True)
@@ -467,9 +466,21 @@ def 执行任务(任务数据: 执行数据类):
     return '执行完毕'
 
 
+# 提供两个参数，第一个是主机地址，第二个是端口地址。
+def 设置服务配置():
+    if len(sys.argv) == 2:
+        return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=8888, log_level="info", reload=True)
+    elif len(sys.argv) == 3:
+        return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=int(sys.argv[2]), log_level="info",
+                              reload=True)
+    else:
+        return uvicorn.Config("接入口:快捷应用程序接口", host='127.0.0.1', port=8888, log_level="info", reload=True)
+
+
 # uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 # pip install python-multipart 可能出现报错需要安卓
 if __name__ == "__main__":
-    服务配置 = uvicorn.Config("接入口:快捷应用程序接口", port=8888, log_level="info", reload=True)
+    print("小犬的正在狂奔......")
+    服务配置 = 设置服务配置()
     服务 = uvicorn.Server(服务配置)
     服务.run()
