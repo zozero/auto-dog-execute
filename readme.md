@@ -16,11 +16,9 @@
 
 ### 方法一
 
-这是最简单的方法，你只需要点击下载[百度网盘]()里的`自动化小犬完整版.zip`文件就可以直接使用。
+这是最简单的方法，你只需要点击[百度网盘](https://pan.baidu.com/s/1qtLPN5_FTD0JkrlTo_NfvQ?pwd=tw9q)下载`自动化小犬完整版.zip`文件就可以直接使用。
 
 解压后双击运行`接入口.exe`，然后在双击运行`自动化小犬.exe`，最后打开你的模拟器。
-
-如果你打算在其他地方下载的话，点击[谷歌]()。
 
 ### 方法二
 下载源代码
@@ -31,13 +29,17 @@ $ git clone https://github.com/zozero/auto-dog-execute.git
 ```bash
 $ cd auto-dog-execute 
 ```
-点击[这里]()下载已经打包的exe文件，点击[百度网盘]()，也可以下载需要的文件。
+点击[这里](https://github.com/zozero/auto-dog-execute/releases)下载已经打包的exe文件。
 
-将下载好的`接入口.exe`文件复制到`auto-dog-execute`目录中，然后双击运行。默认是本地的地址：`127.0.0.1:8888`。
+将下载好的`auto-dog-execute-windows.exe`文件复制到`auto-dog-execute`目录中，然后双击运行。默认是本地的地址：`127.0.0.1:8888`。
+
+下载列表中还有一个`auto-dog-execute-windows-unpack.zip`是未压缩版，启动速度会快上不少。
+
 
 ##### 额外
 
 你可以打开cmd命令行，这样你可以添加两个参数，例如：`接入口.exe 127.0.0.1 8866`，其中第一个参数`127.0.0.1`是启动地址，第二个`8866`是端口。它们用空格隔开。
+
 
 ### 方法三
 首先前往这里下载[python conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/windows.html)，直接下载这个版本<b>Anaconda Distribution installer for Windows</b>
@@ -59,6 +61,14 @@ $ pip install -r requirements.txt
 ```bash
 $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 ```
+
+### 打包
+
+打包成一个文件`pyinstaller --onefile 接入口.py`。
+
+打包成多个文件`pyinstaller 接入口.py`。
+
+打包出来的文件再`dist`目录下，它们需要复制到有`接入口.py`文件的目录下使用。
 
 ## 视频教程
 
