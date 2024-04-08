@@ -14,7 +14,7 @@ from fastapi.staticfiles import StaticFiles
 
 from 公共函数屋.图片处理 import 上传图转二值图片
 from 数据类型屋.接收类型 import 执行数据类, 图片匹配数据类, 图片二值化匹配数据类, 步骤数据类, 测试步骤数据类, \
-    任务数据类, 测试任务数据类, 匹配再匹配数据类, 无图匹配数据类
+    任务数据类, 测试任务数据类, 匹配再匹配数据类, 无图匹配数据类, 多图匹配数据类
 from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
 
@@ -89,6 +89,23 @@ async def 上传图片截图(图片: UploadFile, 项目名: str):
     return 函数名 + " 保存成功"
 
 
+# 保存图片匹配的多张图片到相应文件夹中
+@快捷应用程序接口.post("/方法/上传多张截图")
+async def 上传多张截图(图片列表: list[UploadFile], 项目名: str):
+    目录路径 = os.path.join('项目文件屋', 项目名, '图片间')
+    # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(目录路径, exist_ok=True)
+    for 图片 in 图片列表:
+        # 前端会直接指定图片名的
+        存储路径 = os.path.join(目录路径, 图片.filename)
+        with open(存储路径, 'wb') as 文件:
+            文件内容 = await 图片.read()
+            文件.write(文件内容)
+
+    函数名 = inspect.stack()[0][3]
+    return 函数名 + " 保存成功"
+
+
 @快捷应用程序接口.post("/方法/二值转化")
 async def 二值转化图片(图片: UploadFile, 阈值: int, 阈值类型: int):
     图片内容 = await 图片.read()
@@ -97,8 +114,9 @@ async def 二值转化图片(图片: UploadFile, 阈值: int, 阈值类型: int)
 
 
 # 保存数据到相应的csv表格中
+# 注意数据类型有着以多包少，多的要放前面
 @快捷应用程序接口.post("/方法/添加")
-def 添加方法数据(数据: Union[图片匹配数据类, 图片二值化匹配数据类, 匹配再匹配数据类, 无图匹配数据类], 项目名: str,
+def 添加方法数据(数据: Union[多图匹配数据类, 图片匹配数据类, 图片二值化匹配数据类, 匹配再匹配数据类, 无图匹配数据类], 项目名: str,
                  方法名: str):
     表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
     # 不存在目录就创建目录，存在的话就不要报错了

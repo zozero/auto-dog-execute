@@ -60,6 +60,16 @@ class 无图匹配数据类(BaseModel):
     Y轴: int
 
 
+class 多图匹配数据类(BaseModel):
+    序号: int | None = None
+    图片名: str
+    数量: int
+    范围: str
+    算法: int
+    最低相似度: float
+    额外补充: int
+
+
 class 步骤数据类(BaseModel):
     序号: int | None = None
     名称: str

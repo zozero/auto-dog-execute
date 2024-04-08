@@ -72,7 +72,7 @@ class 执行类:
             self.最终状态 = True
             return
         # 如果没有找到结果，那么根据要求再次去运行一遍统筹过程。
-        if self.步骤数据['循环次数'] == 0 or self.循环次数 <= self.步骤数据['循环次数']:
+        if self.步骤数据['循环次数'] == 0 or self.循环次数 < self.步骤数据['循环次数']:
             time.sleep(self.步骤数据['循环间隔'])
             self.循环次数 += 1
             # 继续循环
