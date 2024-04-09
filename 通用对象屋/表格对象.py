@@ -56,6 +56,15 @@ class 表格处理类:
         数据帧 = pd.DataFrame(self.一条数据)
         数据帧.to_csv(self.完整路径, mode='a', header=False, index=False, encoding=统一编码)
 
+    def 修改数据(self, 编号: int):
+        列表 = []
+        for 索引 in self.一条数据.keys():
+            if 索引 == '序号':
+                continue
+            列表.append(self.一条数据[索引][0])
+        self.数据表.loc[编号] = 列表
+        self.数据表.to_csv(self.完整路径, mode='w', encoding=统一编码)
+
     def 创建csv表格(self):
         键列表 = self.一条数据.keys()
         字典 = {}

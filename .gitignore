@@ -3,3 +3,6 @@
 /build/
 /dist/
 /接入口.exe
+/runs/
+/datasets/
+/result.jpg

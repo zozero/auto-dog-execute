@@ -3,6 +3,7 @@ import inspect
 import sys
 import os
 
+from PIL import Image
 from fastapi import FastAPI, UploadFile, HTTPException, status
 from typing import Union
 import uvicorn
@@ -12,15 +13,20 @@ from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from ultralytics import settings
+
 from 公共函数屋.图片处理 import 上传图转二值图片
 from 数据类型屋.接收类型 import 执行数据类, 图片匹配数据类, 图片二值化匹配数据类, 步骤数据类, 测试步骤数据类, \
-    任务数据类, 测试任务数据类, 匹配再匹配数据类, 无图匹配数据类, 多图匹配数据类
+    任务数据类, 测试任务数据类, 匹配再匹配数据类, 无图匹配数据类, 多图匹配数据类, 你只看一次数据类
 from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
 
 from 核心对象屋.执行对象 import 任务类
+from 核心对象屋.智能对象 import 你只看一次类
 from 通用对象屋.委托对象 import 委托对象类
+from 通用对象屋.模型对象 import 模型操作类
 from 通用对象屋.表格对象 import 表格处理类
+from 通用对象屋.配置对象 import 仍是一种标记语言类
 
 # 用于打包后防止报错
 根路径 = os.getcwd()
@@ -106,6 +112,75 @@ async def 上传多张截图(图片列表: list[UploadFile], 项目名: str):
     return 函数名 + " 保存成功"
 
 
+@快捷应用程序接口.get("/你只看一次/分类列表")
+def 上传你只看一次数据(项目名: str):
+    标记 = 仍是一种标记语言类(项目名, '你只看一次')
+    标记.打开()
+    return 标记.获得分类列表()
+
+
+@快捷应用程序接口.get("/你只看一次/分类")
+def 增加你只看一次分类(项目名: str, 分类名: str):
+    标记 = 仍是一种标记语言类(项目名, '你只看一次')
+    标记.打开()
+    标记.增加分类(分类名)
+    return '增加分类成功'
+
+
+@快捷应用程序接口.post("/你只看一次/上传数据")
+async def 上传你只看一次数据(图片列表: list[UploadFile], 标签列表: list[UploadFile], 项目名: str, 分类名: str):
+    图片目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', '数据箱', 分类名, 'images')
+    # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(图片目录路径, exist_ok=True)
+
+    标签目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', '数据箱', 分类名, 'labels')
+    # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(标签目录路径, exist_ok=True)
+
+    数量 = len(os.listdir(图片目录路径))
+
+    for i in range(len(图片列表)):
+        数量 += 1
+        数量文字 = str(数量)
+        # 前端会直接指定图片名的
+        存储路径 = os.path.join(图片目录路径, 数量文字 + '.jpg')
+        with open(存储路径, 'wb') as 文件:
+            文件内容 = await 图片列表[i].read()
+            文件.write(文件内容)
+
+        # 前端会直接指定图片名的
+        存储路径 = os.path.join(标签目录路径, 数量文字 + '.txt')
+        with open(存储路径, 'wb') as 文件:
+            文件内容 = await 标签列表[i].read()
+            文件.write(文件内容)
+
+    函数名 = inspect.stack()[0][3]
+    return 函数名 + " 保存成功"
+
+
+@快捷应用程序接口.get("/你只看一次/训练")
+def 训练你只看一次(项目名: str, 分类名: str):
+    数据目录 = os.path.join('.', '项目文件屋', 项目名, '智能间', '你只看一次', '数据箱', 分类名)
+
+    # 设置数据目录到当前文件夹中 查看设置命令：yolo settings
+    settings.update({'datasets_dir': 数据目录})
+    # 重置会默认值
+    # settings.reset()
+
+    模型操作 = 模型操作类(项目名)
+    配置 = 仍是一种标记语言类(项目名, '你只看一次')
+
+    模型操作.保存旧模型()
+    你只看一次类.训练(模型操作.项目模型存放路径, 配置.项目配置文件路径, 设备=[0, 1])
+    # 直接拿训练的第一张图片去判断
+    图片路径 = os.path.join(数据目录, 'images', '1.jpg')
+    # 载入图片
+    图片 = Image.open(图片路径)
+    你只看一次类.预测(模型操作.项目模型存放路径, 图片)
+
+    return '增加分类成功'
+
+
 @快捷应用程序接口.post("/方法/二值转化")
 async def 二值转化图片(图片: UploadFile, 阈值: int, 阈值类型: int):
     图片内容 = await 图片.read()
@@ -116,7 +191,9 @@ async def 二值转化图片(图片: UploadFile, 阈值: int, 阈值类型: int)
 # 保存数据到相应的csv表格中
 # 注意数据类型有着以多包少，多的要放前面
 @快捷应用程序接口.post("/方法/添加")
-def 添加方法数据(数据: Union[多图匹配数据类, 图片匹配数据类, 图片二值化匹配数据类, 匹配再匹配数据类, 无图匹配数据类], 项目名: str,
+def 添加方法数据(数据: Union[
+    多图匹配数据类, 图片匹配数据类, 图片二值化匹配数据类, 匹配再匹配数据类, 无图匹配数据类, 你只看一次数据类],
+                 项目名: str,
                  方法名: str):
     表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
     # 不存在目录就创建目录，存在的话就不要报错了
@@ -136,6 +213,24 @@ def 添加方法数据(数据: Union[多图匹配数据类, 图片匹配数据�
 
 
 # 获取csv文件
+@快捷应用程序接口.post("/方法/修改")
+async def 修改方法表格(数据: Union[你只看一次数据类], 项目名: str, 方法名: str):
+    表格目录 = os.path.join('项目文件屋', 项目名, '方法间')
+    # 不存在目录就创建目录，存在的话就不要报错了
+    os.makedirs(表格目录, exist_ok=True)
+    # 完整路径
+    文件完整路径 = os.path.join(表格目录, 方法名 + '.csv')
+    数据字典 = 数据.model_dump()
+    新字典 = {}
+    for 索引 in 数据字典.keys():
+        新字典[索引] = [数据字典[索引]]
+
+    表格 = 表格处理类(文件完整路径, 新字典)
+    表格.修改数据(数据.序号)
+    return "修改成功"
+
+
+# 覆盖csv文件
 @快捷应用程序接口.put("/方法/覆盖")
 async def 覆盖方法表格(csv文件: UploadFile, 项目名: str, 方法名: str):
     表格目录 = os.path.join('项目文件屋', 项目名, '方法间')

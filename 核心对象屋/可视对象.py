@@ -111,5 +111,5 @@ class 计算机可视化开源类:
         return 二值化
 
     @staticmethod
-    def test(参数):
+    def 测试(参数):
         print(参数, " 这是用来测试的函数")

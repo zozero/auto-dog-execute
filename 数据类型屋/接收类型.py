@@ -57,6 +57,13 @@ class 无图匹配数据类(BaseModel):
     Y轴: int
 
 
+class 你只看一次数据类(BaseModel):
+    序号: int
+    分类: str
+    轮回数: int
+    置信度: float
+
+
 class 多图匹配数据类(BaseModel):
     序号: int | None = None
     图片名: str
