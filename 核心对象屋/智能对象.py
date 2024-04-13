@@ -22,7 +22,7 @@ class 你只看一次类:
         return 结果
 
     @staticmethod
-    def 预测(图片, 模型路径: str, 置信度: float = 0.2, 设备: Union[list, int, str] = 0) -> tensor:
+    def 预测(模型路径: str, 图片, 置信度: float = 0.2, 设备: Union[list, int, str] = 0) -> tensor:
         你只看一次模型 = YOLO(模型路径)
         结果列表: list = 你只看一次模型.predict(图片, show_labels=False, show_conf=False, show_boxes=False, conf=置信度,
                                                 device=设备)

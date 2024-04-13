@@ -1,6 +1,7 @@
 import os
 
 import numpy as np
+import torch
 from torch import tensor
 
 from 公共函数屋.字符转换 import 字符串转换, 范围转换
@@ -9,6 +10,7 @@ from 数据类型屋.结果类型 import 结果类
 from 核心对象屋.可视对象 import 计算机可视化开源类
 from 核心对象屋.智能对象 import 你只看一次类
 from 通用对象屋.委托对象 import 委托对象类
+from 通用对象屋.模型对象 import 模型操作类
 from 通用对象屋.消息对象 import 消息提示类
 from 通用对象屋.表格对象 import 逗号分隔符类
 from 通用对象屋.默认对象 import 目录名称对象
@@ -175,6 +177,8 @@ class 方法预处理类:
                 self.预处理无图匹配()
             case 'E':
                 self.预处理多图匹配()
+            case 'F':
+                self.预处理你只看一次()
 
     def 预处理图片匹配(self):
         # 旧图路径需要放在这里，之后可以无图匹配的方式
@@ -285,3 +289,17 @@ class 方法预处理类:
         self.参数字典['新图'] = 图片
         self.参数字典['新图路径'] = 图片路径
         self.参数字典['范围'] = 范围
+
+    def 预处理你只看一次(self):
+        模型操作 = 模型操作类(self.参数字典['项目名'], self.参数字典['分类'], '你只看一次')
+        self.参数字典['模型路径'] = 模型操作.最佳模型路径()
+        # 截取范围是左上和右下的坐标
+        屏幕尺寸 = 委托对象类.字典[self.参数字典['项目名']].获取手机屏幕尺寸()
+        范围 = (0, 0, 屏幕尺寸[0], 屏幕尺寸[1])
+        图片路径, 图片 = 委托对象类.字典[self.参数字典['项目名']].裁剪图片(范围)
+        self.参数字典['图片'] = 图片
+
+        设备 = 'cpu'
+        if torch.cuda.is_available():
+            设备 = list(range(torch.cuda.device_count()))
+        self.参数字典['设备'] = 设备
