@@ -1,6 +1,7 @@
 import os
 import shutil
 
+from 通用对象屋.消息对象 import 消息提示类
 from 通用对象屋.默认对象 import 目录名称对象
 
 
@@ -28,4 +29,10 @@ class 模型操作类:
 
     def 最佳模型路径(self):
         文件夹列表 = os.listdir(self.模型箱目录)
-        return os.path.join(self.模型箱目录,文件夹列表[-1], 'weights', 'best.pt')
+        计数 = len(文件夹列表)
+
+        for i in range(1, 计数 + 1):
+            文件路径 = os.path.join(self.模型箱目录, 文件夹列表[-i], 'weights', 'best.pt')
+            if os.path.exists(文件路径):
+                return 文件路径
+        return 消息提示类.致命错误('模型操作类->最佳模型路径','不存在模型文件。')

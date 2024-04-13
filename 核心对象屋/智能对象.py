@@ -6,11 +6,8 @@ import numpy as np
 from PIL import Image, ImageDraw
 from torch import tensor
 from ultralytics import YOLO
-import shutil
 
 from 核心对象屋.可视对象 import 计算机可视化开源类
-from 通用对象屋.模型对象 import 模型操作类
-from 通用对象屋.默认对象 import 目录名称对象
 
 
 class 你只看一次类:
