@@ -2,9 +2,13 @@
 import inspect
 import sys
 import os
+import io
 
-from PIL import Image
-from fastapi import FastAPI, UploadFile, HTTPException, status
+import cv2
+import numpy as np
+import torch.cuda
+from PIL import Image, ImageDraw
+from fastapi import FastAPI, UploadFile, HTTPException, status, Response
 from typing import Union
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,7 +30,7 @@ from 核心对象屋.智能对象 import 你只看一次类
 from 通用对象屋.委托对象 import 委托对象类
 from 通用对象屋.模型对象 import 模型操作类
 from 通用对象屋.表格对象 import 表格处理类
-from 通用对象屋.配置对象 import 仍是一种标记语言类
+from 通用对象屋.配置对象 import 你只看一次的仍是一种标记语言类
 
 # 用于打包后防止报错
 根路径 = os.getcwd()
@@ -112,28 +116,42 @@ async def 上传多张截图(图片列表: list[UploadFile], 项目名: str):
     return 函数名 + " 保存成功"
 
 
-@快捷应用程序接口.get("/你只看一次/分类列表")
-def 上传你只看一次数据(项目名: str):
-    标记 = 仍是一种标记语言类(项目名, '你只看一次')
-    标记.打开()
-    return 标记.获得分类列表()
+# 暂时无法使用
+# @快捷应用程序接口.get("/你只看一次/分类列表")
+# def 上传你只看一次数据(项目名: str):
+#     标记 = 仍是一种标记语言类(项目名, '你只看一次')
+#     标记.打开()
+#     return 标记.获得分类列表()
+
+# @快捷应用程序接口.get("/你只看一次/分类列表")
+# def 获得你只看一次分类列表(项目名: str):
+#     图片目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次')
+#     分类列表 = os.listdir(图片目录路径)
+#     return 分类列表
+
+
+@快捷应用程序接口.get("/你只看一次/图片列表")
+def 获取你只看一次图片列表(项目名: str, 分类名: str):
+    图片目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', 分类名, 'images')
+    图片列表 = os.listdir(图片目录路径)
+    return 图片列表
 
 
 @快捷应用程序接口.get("/你只看一次/分类")
 def 增加你只看一次分类(项目名: str, 分类名: str):
-    标记 = 仍是一种标记语言类(项目名, '你只看一次')
+    标记 = 你只看一次的仍是一种标记语言类(项目名, 分类名, '你只看一次')
     标记.打开()
-    标记.增加分类(分类名)
+    标记.增加分类()
     return '增加分类成功'
 
 
 @快捷应用程序接口.post("/你只看一次/上传数据")
 async def 上传你只看一次数据(图片列表: list[UploadFile], 标签列表: list[UploadFile], 项目名: str, 分类名: str):
-    图片目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', '数据箱', 分类名, 'images')
+    图片目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', 分类名, 'images')
     # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(图片目录路径, exist_ok=True)
 
-    标签目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', '数据箱', 分类名, 'labels')
+    标签目录路径 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', 分类名, 'labels')
     # 不存在目录就创建目录，存在的话就不要报错了
     os.makedirs(标签目录路径, exist_ok=True)
 
@@ -159,26 +177,89 @@ async def 上传你只看一次数据(图片列表: list[UploadFile], 标签列�
 
 
 @快捷应用程序接口.get("/你只看一次/训练")
-def 训练你只看一次(项目名: str, 分类名: str):
-    数据目录 = os.path.join('.', '项目文件屋', 项目名, '智能间', '你只看一次', '数据箱', 分类名)
-
+def 训练你只看一次(项目名: str, 分类名: str, 轮回数: int):
+    数据目录 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', 分类名)
+    项目目录 = os.path.join(数据目录, '模型箱')
     # 设置数据目录到当前文件夹中 查看设置命令：yolo settings
     settings.update({'datasets_dir': 数据目录})
     # 重置会默认值
     # settings.reset()
 
-    模型操作 = 模型操作类(项目名)
-    配置 = 仍是一种标记语言类(项目名, '你只看一次')
+    模型操作 = 模型操作类(项目名, 分类名, '你只看一次')
+    配置 = 你只看一次的仍是一种标记语言类(项目名, 分类名, '你只看一次')
 
-    模型操作.保存旧模型()
-    你只看一次类.训练(模型操作.项目模型存放路径, 配置.项目配置文件路径, 设备=[0, 1])
+    设备 = 'cpu'
+    if torch.cuda.is_available():
+        设备 = list(range(torch.cuda.device_count()))
+    # 设置参数
+    字典 = dict(
+        模型路径=模型操作.最佳模型路径(),
+        项目目录=模型操作.模型箱目录,
+        配置路径=配置.项目配置文件路径,
+        轮回数=轮回数,
+        设备=设备
+    )
+    # 开始训练
+    你只看一次类.训练(**字典)
+
+    return '训练完毕'
+
+
+@快捷应用程序接口.get("/你只看一次/分类预测")
+def 你只看一次分类预测(项目名: str, 模拟器的ip和端口: str, 分类名: str, 置信度: float):
+    # 模型的存储路径需要更改，因为追加训练会导致原先训练的消失，要么选择一次性训练多个，要么只训练一个的同时，保存一个。
+    模型操作 = 模型操作类(项目名, 分类名)
     # 直接拿训练的第一张图片去判断
-    图片路径 = os.path.join(数据目录, 'images', '1.jpg')
+    我的模拟器 = 安卓指令类(模拟器的ip和端口)
+    我的图片 = 我的模拟器.截屏()
+    图片 = Image.open(我的图片)
     # 载入图片
-    图片 = Image.open(图片路径)
-    你只看一次类.预测(模型操作.项目模型存放路径, 图片)
+    # 图片 = Image.open(图片路径)
 
-    return '增加分类成功'
+    # 自动设定预测的设备
+    设备 = 'cpu'
+    if torch.cuda.is_available():
+        设备 = list(range(torch.cuda.device_count()))
+
+    字典 = dict(
+        图片=图片,
+        模型路径=模型操作.最佳模型路径(),
+        # 模型路径='ceshi2.pt',
+        # 模型路径='best.pt',
+        # 这里分类序号是固定的，具体可以查看配置.yaml文件
+        分类序号=80,
+        置信度=置信度,
+        设备=设备
+    )
+    图片流 = 你只看一次类.分类预测(**字典)
+
+    return StreamingResponse(图片流, media_type="image/jpg")
+
+
+# 该方法无法使用，除非一次性训练所有模型，所以当前无法使用了
+# @快捷应用程序接口.get("/你只看一次/全类预测")
+# def 你只看一次全类预测(项目名: str, 模拟器的ip和端口: str, 置信度: float):
+#     模型操作 = 模型操作类(项目名)
+#     # 直接拿训练的第一张图片去判断
+#     # 图片路径 = os.path.join(数据目录, 'images', '1.jpg')
+#     我的模拟器 = 安卓指令类(模拟器的ip和端口)
+#     我的图片 = 我的模拟器.截屏()
+#     图片 = Image.open(我的图片)
+#     # 载入图片
+#     # 图片 = Image.open(图片路径)
+#     设备 = 'cpu'
+#     if torch.cuda.is_available():
+#         设备 = list(range(torch.cuda.device_count()))
+#
+#     字典 = dict(
+#         图片=图片,
+#         模型路径=模型操作.项目模型存放路径,
+#         置信度=置信度,
+#         设备=设备
+#     )
+#     图片流 = 你只看一次类.全类预测(**字典)
+#
+#     return StreamingResponse(图片流, media_type="image/jpg")
 
 
 @快捷应用程序接口.post("/方法/二值转化")

@@ -58,7 +58,7 @@ class 无图匹配数据类(BaseModel):
 
 
 class 你只看一次数据类(BaseModel):
-    序号: int
+    序号: int | None = None
     分类: str
     轮回数: int
     置信度: float
