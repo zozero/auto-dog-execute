@@ -1,11 +1,14 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from PyInstaller.utils.hooks import collect_data_files
+import ultralytics
+ultra_files = collect_data_files('ultralytics')
 
 a = Analysis(
-    ['接入口.py'],
+        ['接入口.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=ultra_files,
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

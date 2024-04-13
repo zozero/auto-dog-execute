@@ -2,13 +2,10 @@
 import inspect
 import sys
 import os
-import io
 
-import cv2
-import numpy as np
-import torch.cuda
-from PIL import Image, ImageDraw
-from fastapi import FastAPI, UploadFile, HTTPException, status, Response
+import torch
+from PIL import Image
+from fastapi import FastAPI, UploadFile, HTTPException, status
 from typing import Union
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
@@ -179,10 +176,11 @@ async def 上传你只看一次数据(图片列表: list[UploadFile], 标签列�
 @快捷应用程序接口.get("/你只看一次/训练")
 def 训练你只看一次(项目名: str, 分类名: str, 轮回数: int):
     数据目录 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', 分类名)
+    # 重置会默认值
+    settings.reset()
     # 设置数据目录到当前文件夹中 查看设置命令：yolo settings
     settings.update({'datasets_dir': 数据目录})
-    # 重置会默认值
-    # settings.reset()
+
 
     模型操作 = 模型操作类(项目名, 分类名, '你只看一次')
     配置 = 你只看一次的仍是一种标记语言类(项目名, 分类名, '你只看一次')
@@ -673,7 +671,7 @@ def 设置服务配置():
 # uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 # pip install python-multipart 可能出现报错需要安卓
 if __name__ == "__main__":
-    print("小犬的正在狂奔......")
+    print("小犬正在狂奔......")
     服务配置 = 设置服务配置()
     服务 = uvicorn.Server(服务配置)
     服务.run()

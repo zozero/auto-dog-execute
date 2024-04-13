@@ -2,7 +2,6 @@ import os
 import shutil
 
 from 通用对象屋.消息对象 import 消息提示类
-from 通用对象屋.默认对象 import 目录名称对象
 
 
 class 模型操作类:
