@@ -118,7 +118,7 @@ class 安卓指令类:
         else:
             return 输出[-1] - self.__刘海高度, 输出[-2]
 
-    def 裁剪图片(self, 范围=(0, 0, 10, 10), 完整相对路径='垃圾堆放屋/临时', 是否保存=True):
+    def 裁剪图片(self, 范围=(0, 0, 10, 10), 完整相对路径='临时堆放屋/临时', 是否保存=True):
         # 将图片转换成opencv专用的格式后，在转成opencv的格式不过这个图片是BGR的顺序的。
         # 现在是多次一举的。暂时注释，后期可能删除。
         # 图片 = cv.imdecode(np.asarray(bytearray(输出), dtype=np.uint8), cv.IMREAD_COLOR)

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 import inspect
+import shutil
 import sys
 import os
+import time
 
 import torch
 from PIL import Image
@@ -74,7 +76,7 @@ def 修改项目名(项目名: str, 新名字: str):
     表格目录路径 = os.path.join('项目文件屋', 项目名, )
     新表格目录路径 = os.path.join('项目文件屋', 新名字, )
     if os.path.exists(表格目录路径) and os.path.exists(新表格目录路径) is False:
-        os.rename(表格目录路径, 新表格目录路径)
+        shutil.move(表格目录路径, 新表格目录路径)
         return '修改目录完成。'
     else:
         return '修改目录失败，可能是不存在该目录或新目录名已存在。'
@@ -176,10 +178,11 @@ async def 上传你只看一次数据(图片列表: list[UploadFile], 标签列�
 @快捷应用程序接口.get("/你只看一次/训练")
 def 训练你只看一次(项目名: str, 分类名: str, 轮回数: int):
     数据目录 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', 分类名)
-    # 重置会默认值
-    settings.reset()
+    # 重置你只看一次的配置文件为默认值
+    # settings.reset()
     # 设置数据目录到当前文件夹中 查看设置命令：yolo settings
     settings.update({'datasets_dir': 数据目录})
+    time.sleep(1)
 
 
     模型操作 = 模型操作类(项目名, 分类名, '你只看一次')
@@ -659,13 +662,29 @@ def 执行任务(任务数据: 执行数据类):
 
 # 提供两个参数，第一个是主机地址，第二个是端口地址。
 def 设置服务配置():
+    # 日志配置 = {
+    #     "version": 1,
+    #     "disable_existing_loggers": True,
+    #     "handlers": {
+    #         "file_handler": {
+    #             "class": "logging.FileHandler",
+    #             "filename": "logfile.log",
+    #         },
+    #     },
+    #     "root": {
+    #         "handlers": ["file_handler"],
+    #         "level": "INFO",
+    #     },
+    # }
+
     if len(sys.argv) == 2:
-        return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=8888, log_level="info", reload=True)
+        return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=8888, reload=False)
+        # return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=8888, reload=False,log_config=日志配置)
     elif len(sys.argv) == 3:
-        return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=int(sys.argv[2]), log_level="info",
-                              reload=True)
+        return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=int(sys.argv[2]),
+                              reload=False)
     else:
-        return uvicorn.Config("接入口:快捷应用程序接口", host='127.0.0.1', port=8888, log_level="info", reload=True)
+        return uvicorn.Config("接入口:快捷应用程序接口", host='127.0.0.1', port=8888, reload=False)
 
 
 # uvicorn 接入口:快捷应用程序接口 --reload --port 8888

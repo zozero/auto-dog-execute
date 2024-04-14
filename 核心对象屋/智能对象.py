@@ -5,8 +5,8 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw
 from torch import tensor
-from ultralytics import YOLO
 
+from ultralytics import YOLO
 from 核心对象屋.可视对象 import 计算机可视化开源类
 
 

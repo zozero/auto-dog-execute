@@ -5,7 +5,7 @@ import ultralytics
 ultra_files = collect_data_files('ultralytics')
 
 a = Analysis(
-        ['接入口.py'],
+    ['接入口.py'],
     pathex=[],
     binaries=[],
     datas=ultra_files,
