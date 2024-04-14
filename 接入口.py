@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import inspect
+import multiprocessing
 import shutil
 import sys
 import os
-import time
 
 import torch
 from PIL import Image
@@ -178,11 +178,10 @@ async def 上传你只看一次数据(图片列表: list[UploadFile], 标签列�
 @快捷应用程序接口.get("/你只看一次/训练")
 def 训练你只看一次(项目名: str, 分类名: str, 轮回数: int):
     数据目录 = os.path.join('项目文件屋', 项目名, '智能间', '你只看一次', 分类名)
+
     # 重置你只看一次的配置文件为默认值
-    # settings.reset()
     # 设置数据目录到当前文件夹中 查看设置命令：yolo settings
     settings.update({'datasets_dir': 数据目录})
-    time.sleep(1)
 
 
     模型操作 = 模型操作类(项目名, 分类名, '你只看一次')
@@ -191,6 +190,7 @@ def 训练你只看一次(项目名: str, 分类名: str, 轮回数: int):
     设备 = 'cpu'
     if torch.cuda.is_available():
         设备 = list(range(torch.cuda.device_count()))
+        # 设备 = 0
     # 设置参数
     字典 = dict(
         模型路径=模型操作.最佳模型路径(),
@@ -201,7 +201,6 @@ def 训练你只看一次(项目名: str, 分类名: str, 轮回数: int):
     )
     # 开始训练
     你只看一次类.训练(**字典)
-
     return '训练完毕'
 
 
@@ -679,7 +678,7 @@ def 设置服务配置():
 
     if len(sys.argv) == 2:
         return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=8888, reload=False)
-        # return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=8888, reload=False,log_config=日志配置)
+        # return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=8888, reload=False, log_config=日志配置)
     elif len(sys.argv) == 3:
         return uvicorn.Config("接入口:快捷应用程序接口", host=sys.argv[1], port=int(sys.argv[2]),
                               reload=False)
@@ -690,6 +689,8 @@ def 设置服务配置():
 # uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 # pip install python-multipart 可能出现报错需要安卓
 if __name__ == "__main__":
+    # 打包的时候必须要冻结多线程操作。但这直接导致了程序运行缓慢。并且这直接导致了无法使用多个gpu同时训练。
+    # multiprocessing.freeze_support()
     print("小犬正在狂奔......")
     服务配置 = 设置服务配置()
     服务 = uvicorn.Server(服务配置)
