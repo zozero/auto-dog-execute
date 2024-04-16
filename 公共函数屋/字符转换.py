@@ -22,7 +22,7 @@ def 字符串转换(字符串) -> float | int | str | list:
 
 
 def 编码转换(字符串) -> list:
-    正则结果 = re.findall(r"[A-Z]|-?\d+", 字符串)
+    正则结果 = re.findall(r"[A-Z]|\d+\.\d+|-?\d+", 字符串)
     新列表 = []
     for 字符 in 正则结果:
         新列表.append(字符串转换(字符))

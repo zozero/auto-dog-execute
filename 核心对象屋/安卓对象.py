@@ -68,6 +68,23 @@ class 安卓指令类:
             self.__执行命令(命令)
             self.间隙时间(休眠时间)
 
+    def 长按屏幕(self, 位置: tuple, 持续时间: int = 1, 休眠时间=0.8, **参数字典):
+        """
+
+        :param 位置: 按住的位置，例如(50,50)
+        :param 持续时间: 需要按住多久。
+        :param 休眠时间:
+        :return:
+        """
+        if 位置 is not None and 位置 != '':
+            x的增量, y的增量 = self.__计算增量()
+            命令 = self.__安卓调试桥路径 + "shell input swipe" + self.__空格 + str(
+                x的增量 + 位置[0]) + self.__空格 + str(
+                y的增量 + 位置[1]) + self.__空格 + str(x的增量 + 位置[0]) + self.__空格 + str(
+                y的增量 + 位置[1]) + self.__空格 + str(持续时间 * 1000)
+            self.__执行命令(命令)
+            self.间隙时间(休眠时间)
+
     def 返回(self, 休眠时间=0.8, **参数字典):
         命令 = self.__安卓调试桥路径 + "shell input keyevent KEYCODE_BACK"
         self.__执行命令(命令)
@@ -77,6 +94,9 @@ class 安卓指令类:
         命令 = self.__安卓调试桥路径 + "shell input keyevent KEYCODE_HOME"
         self.__执行命令(命令)
         self.间隙时间(休眠时间)
+
+    def 无行为(self, **参数字典):
+        pass
 
     def __计算增量(self):
         """
@@ -228,6 +248,11 @@ class 安卓预处理类:
         self.编码列表 = 编码列表
         self.判断结果 = 判断结果
         self.参数字典 = {}
+
+        if len(编码列表) == 0:
+            self.预处理无行为()
+            return
+
         match 编码列表[0]:
             case 'A':
                 self.预处理点击()
@@ -237,6 +262,8 @@ class 安卓预处理类:
                 self.预处理返回()
             case 'D':
                 self.预处理主界面()
+            case 'E':
+                self.预处理长按屏幕()
 
     def 预处理点击(self):
         self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].敲击屏幕
@@ -261,3 +288,12 @@ class 安卓预处理类:
     def 预处理主界面(self):
         self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].主界面
         self.参数字典['位置'] = self.判断结果.位置
+
+    def 预处理长按屏幕(self):
+        self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].长按屏幕
+        self.参数字典['位置'] = self.判断结果.位置
+        if len(self.编码列表) == 2:
+            self.参数字典['持续时间'] = self.编码列表[1]
+
+    def 预处理无行为(self):
+        self.参数字典['行为函数'] = 委托对象类.字典[self.项目名].无行为
