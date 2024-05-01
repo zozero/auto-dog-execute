@@ -5,6 +5,7 @@ import shutil
 import sys
 import os
 
+import numpy as np
 import torch
 from PIL import Image
 from fastapi import FastAPI, UploadFile, HTTPException, status
@@ -14,6 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.responses import StreamingResponse
 from fastapi.responses import ORJSONResponse
+from fastapi.responses import Response
 from fastapi.staticfiles import StaticFiles
 
 from ultralytics import settings
@@ -25,7 +27,7 @@ from 核心对象屋.安卓对象 import 安卓指令类
 from 核心对象屋.方法对象 import 匹配方法类
 
 from 核心对象屋.执行对象 import 任务类
-from 核心对象屋.智能对象 import 你只看一次类
+from 核心对象屋.智能对象 import 你只看一次类, 简单光学字符识别类
 from 通用对象屋.委托对象 import 委托对象类
 from 通用对象屋.模型对象 import 模型操作类
 from 通用对象屋.表格对象 import 表格处理类
@@ -183,7 +185,6 @@ def 训练你只看一次(项目名: str, 分类名: str, 轮回数: int):
     # 设置数据目录到当前文件夹中 查看设置命令：yolo settings
     settings.update({'datasets_dir': 数据目录})
 
-
     模型操作 = 模型操作类(项目名, 分类名, '你只看一次')
     配置 = 你只看一次的仍是一种标记语言类(项目名, 分类名, '你只看一次')
 
@@ -233,6 +234,33 @@ def 你只看一次分类预测(项目名: str, 模拟器的ip和端口: str, �
     图片流 = 你只看一次类.分类预测(**字典)
 
     return StreamingResponse(图片流, media_type="image/jpg")
+
+
+@快捷应用程序接口.get("/简单光学字符识别/识别测试")
+def 你只看一次分类预测(模拟器的ip和端口: str, 语种: int, 置信度: float):
+    # 直接拿训练的第一张图片去判断
+    我的模拟器 = 安卓指令类(模拟器的ip和端口)
+    我的图片 = 我的模拟器.截屏()
+    图片 = Image.open(我的图片)
+    图片 = np.asarray(图片.convert('RGB'))
+    # 载入图片
+    # 图片 = Image.open(图片路径)
+    if 语种 == 0:
+        语种 = 'ch_sim'
+    # 自动设定预测的设备
+    设备 = 'cpu'
+    if torch.cuda.is_available():
+        设备 = list(range(torch.cuda.device_count()))
+
+    字典 = dict(
+        图片=图片,
+        语种=语种,
+        置信度=置信度,
+    )
+    图片流 = 简单光学字符识别类.识别测试(**字典)
+
+    # return StreamingResponse(图片流, media_type="image/jpg"),'123'
+    return Response(content=图片流.getvalue(), headers={"message": "This is just test message"}, media_type="image/png")
 
 
 # 该方法无法使用，除非一次性训练所有模型，所以当前无法使用了

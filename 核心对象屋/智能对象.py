@@ -1,10 +1,13 @@
 import io
+import os.path
 from typing import Union
 
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw
 from torch import tensor
+
+import easyocr
 
 from ultralytics import YOLO
 from 核心对象屋.可视对象 import 计算机可视化开源类
@@ -19,7 +22,7 @@ class 你只看一次类:
         return 结果
 
     @staticmethod
-    def 预测(模型路径: str, 图片, 置信度: float = 0.2, 设备: Union[list, int, str] = 0) -> tensor:
+    def 预测(模型路径: str, 图片, 置信度: float = 0.2, 设备: Union[list, int, str] = 0):
         你只看一次模型 = YOLO(模型路径)
         结果列表: list = 你只看一次模型.predict(图片, show_labels=False, show_conf=False, show_boxes=False, conf=置信度,
                                                 device=设备)
@@ -83,10 +86,46 @@ class 你只看一次类:
         图片数组 = 计算机可视化开源类.转换颜色通道(结果.orig_img, cv2.COLOR_BGR2RGB)
         图片 = Image.fromarray(图片数组)
         # 绘制边框
-        draw = ImageDraw.Draw(图片)
+        绘画 = ImageDraw.Draw(图片)
         for 盒子 in 结果盒子列表:
-            # 绘制所有识别到的物体边框。
-            draw.rectangle(盒子[0:4].tolist(), fill=None, outline='red', width=3)
+            # 绘制所有识别到的物体边框。第一个参数是左上右下的四个数字列表。
+            绘画.rectangle(盒子[0:4].tolist(), fill=None, outline='red', width=3)
+        # 转换格式返回数据
+        图片流 = io.BytesIO()
+        # 一定要加格式
+        图片.save(图片流, 'JPEG')
+        图片流.seek(0)
+        return 图片流
+
+
+class 简单光学字符识别类:
+    @staticmethod
+    def 识别(图片, 语种: str = 'ch_sim', 置信度: float = 0.1) -> tensor:
+        语言列表 = [语种, 'en']
+        模型存放目录 = os.path.join('资源存放屋', '简单光学字符识别')
+        读者 = easyocr.Reader(语言列表, model_storage_directory=模型存放目录)
+        结果 = 读者.readtext(图片)
+
+        return 结果
+
+    @staticmethod
+    def 识别测试(图片, 语种: str = 'ch_sim', 置信度: float = 0.1) -> tensor:
+        语言列表 = [语种, 'en']
+        模型存放目录 = os.path.join('资源存放屋', '简单光学字符识别')
+        读者 = easyocr.Reader(语言列表, model_storage_directory=模型存放目录)
+        结果列表 = 读者.readtext(图片)
+        结果盒子列表 = []
+        for 结果 in 结果列表:
+            if 结果[2] < 置信度:
+                continue
+            结果盒子列表.append((结果[0][0][0], 结果[0][0][1], 结果[0][2][0], 结果[0][2][1]))
+
+        图片 = Image.fromarray(图片)
+        # 绘制边框
+        绘画 = ImageDraw.Draw(图片)
+        for 盒子 in 结果盒子列表:
+            # 绘制所有识别到的物体边框。第一个参数是左上右下的四个数字列表。
+            绘画.rectangle(盒子, fill=None, outline='red', width=3)
         # 转换格式返回数据
         图片流 = io.BytesIO()
         # 一定要加格式
