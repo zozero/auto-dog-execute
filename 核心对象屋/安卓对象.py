@@ -214,8 +214,7 @@ class 安卓指令类:
         输出 = 标准输出.decode(self.__编码)
         return 输出
 
-    @staticmethod
-    def __执行命令(命令: str):
+    def __执行命令(self, 命令: str):
         # 命令=命令.split(' ')
         进程 = subprocess.Popen(
             命令,
@@ -225,17 +224,35 @@ class 安卓指令类:
         )
         标准输出, 标准错误 = 进程.communicate()
         if 进程.returncode > 0:
+            self.断开所有连接()
+            self.关闭安卓服务()
             raise Exception(进程.returncode, 标准错误)
         return 标准输出
 
     def __del__(self):
         pass
-        # self.__执行命令(self.__安卓调试桥路径 + 'kill-server')
 
-    def 断开连接(self):
+    def 关闭安卓服务(self):
+        命令 = self.__安卓调试桥路径 + 'kill-server'
+        进程 = subprocess.Popen(
+            命令,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        标准输出, 标准错误 = 进程.communicate()
+
+    def 断开所有连接(self):
         # adb disconnect 手机ip //断开指定IP
         # adb disconnect //断开所有
-        pass
+        命令 = self.__安卓调试桥路径 + 'disconnect'
+        进程 = subprocess.Popen(
+            命令,
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        标准输出, 标准错误 = 进程.communicate()
 
     @staticmethod
     def 间隙时间(时间=0.5):
