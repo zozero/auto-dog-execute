@@ -68,7 +68,7 @@ $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 
 打包成一个文件`pyinstaller --onefile 接入口.py`。
 
-打包成多个文件`pyinstaller 接入口.py`。
+打包成多个文件`pyinstaller 打包.spec`。
 
 打包出来的文件再`dist`目录下，它们需要复制到有`接入口.py`文件的目录下使用。
 
