@@ -122,7 +122,7 @@ class 简单光学字符识别类:
         返回列表 = []
         for 结果 in 结果列表:
             # item()是为了将numpy的数据读取出来成为常规的python数据格式，便于fastapi返回。
-            返回列表.append([(结果[0][0][0].item(), 结果[0][0][1].item(), 结果[0][2][0].item(), 结果[0][2][1].item()), 结果[1], round(结果[2].item(), 2)])
+            返回列表.append([(int(结果[0][0][0]), int(结果[0][0][1]), int(结果[0][2][0]), int(结果[0][2][1])), 结果[1], round(结果[2], 2)])
 
         图片 = Image.fromarray(图片)
         # 绘制边框
@@ -130,6 +130,12 @@ class 简单光学字符识别类:
         for 结果 in 返回列表:
             # 绘制所有识别到的物体边框。第一个参数是左上右下的四个数字列表。
             绘画.rectangle(结果[0], fill=None, outline='red', width=3)
-        图片字符串 = base64.b64encode(图片.tobytes()).decode('utf-8')
+
+        # 转换格式返回数据
+        图片流 = io.BytesIO()
+        # 一定要加格式
+        图片.save(图片流, 'JPEG')
+        图片流.seek(0)
+        图片字符串 = base64.b64encode(图片流.getvalue())
 
         return 图片字符串, 返回列表

@@ -125,10 +125,8 @@ $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 
 ## 赞助
 <p align="center">
-    <img src="./资源存放屋/捐赠.png" alt="捐赠" style="border-radius:50%" />
     <img src="./资源存放屋/微信赞赏码.jpg" alt="微信赞赏码" style="border-radius:50%" />
 </p>  
-<h3 align="center">贫穷常伴吾身，急需救援一波</h3>
 
 ## 许可证
 
