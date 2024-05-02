@@ -1,6 +1,7 @@
 import io
 import os.path
 from typing import Union
+import base64
 
 import cv2
 import numpy as np
@@ -100,35 +101,35 @@ class 你只看一次类:
 
 class 简单光学字符识别类:
     @staticmethod
-    def 识别(图片, 语种: str = 'ch_sim', 置信度: float = 0.1) -> tensor:
-        语言列表 = [语种, 'en']
-        模型存放目录 = os.path.join('资源存放屋', '简单光学字符识别')
-        读者 = easyocr.Reader(语言列表, model_storage_directory=模型存放目录)
-        结果 = 读者.readtext(图片)
-
-        return 结果
-
-    @staticmethod
-    def 识别测试(图片, 语种: str = 'ch_sim', 置信度: float = 0.1) -> tensor:
+    def 识别(图片: np.ndarray, 语种: str = 'ch_sim', 置信度: float = 0.1):
         语言列表 = [语种, 'en']
         模型存放目录 = os.path.join('资源存放屋', '简单光学字符识别')
         读者 = easyocr.Reader(语言列表, model_storage_directory=模型存放目录)
         结果列表 = 读者.readtext(图片)
-        结果盒子列表 = []
+        返回列表 = []
         for 结果 in 结果列表:
             if 结果[2] < 置信度:
                 continue
-            结果盒子列表.append((结果[0][0][0], 结果[0][0][1], 结果[0][2][0], 结果[0][2][1]))
+            返回列表.append([(结果[0][0][0].item(), 结果[0][0][1].item(), 结果[0][2][0].item(), 结果[0][2][1].item()), 结果[1], round(结果[2].item(), 2)])
+        return 返回列表
+
+    @staticmethod
+    def 识别测试(图片: np.ndarray, 语种: str = 'ch_sim'):
+        语言列表 = [语种, 'en']
+        模型存放目录 = os.path.join('资源存放屋', '简单光学字符识别')
+        读者 = easyocr.Reader(语言列表, model_storage_directory=模型存放目录)
+        结果列表 = 读者.readtext(图片)
+        返回列表 = []
+        for 结果 in 结果列表:
+            # item()是为了将numpy的数据读取出来成为常规的python数据格式，便于fastapi返回。
+            返回列表.append([(结果[0][0][0].item(), 结果[0][0][1].item(), 结果[0][2][0].item(), 结果[0][2][1].item()), 结果[1], round(结果[2].item(), 2)])
 
         图片 = Image.fromarray(图片)
         # 绘制边框
         绘画 = ImageDraw.Draw(图片)
-        for 盒子 in 结果盒子列表:
+        for 结果 in 返回列表:
             # 绘制所有识别到的物体边框。第一个参数是左上右下的四个数字列表。
-            绘画.rectangle(盒子, fill=None, outline='red', width=3)
-        # 转换格式返回数据
-        图片流 = io.BytesIO()
-        # 一定要加格式
-        图片.save(图片流, 'JPEG')
-        图片流.seek(0)
-        return 图片流
+            绘画.rectangle(结果[0], fill=None, outline='red', width=3)
+        图片字符串 = base64.b64encode(图片.tobytes()).decode('utf-8')
+
+        return 图片字符串, 返回列表
