@@ -11,6 +11,7 @@ from torch import tensor
 import easyocr
 
 from ultralytics import YOLO
+from 数据类型屋.结果类型 import 结果类
 from 核心对象屋.可视对象 import 计算机可视化开源类
 
 
@@ -101,17 +102,28 @@ class 你只看一次类:
 
 class 简单光学字符识别类:
     @staticmethod
-    def 识别(图片: np.ndarray, 语种: str = 'ch_sim', 置信度: float = 0.1):
+    def 识别(图片, 文本: str, 语种: str = 'ch_sim', 最低相似度: float = 0.1) -> 结果类:
+        print("简单光学字符识别类")
+        # 返回值
+        返回值 = 结果类()
+        返回值.状态 = False
+        返回值.图片尺寸 = (图片.shape[1], 图片.shape[0])
+        返回值.最高相似度 = 0
+        返回值.位置 = (0, 0)
+
         语言列表 = [语种, 'en']
         模型存放目录 = os.path.join('资源存放屋', '简单光学字符识别')
         读者 = easyocr.Reader(语言列表, model_storage_directory=模型存放目录)
         结果列表 = 读者.readtext(图片)
-        返回列表 = []
         for 结果 in 结果列表:
-            if 结果[2] < 置信度:
+            if 结果[2] < 最低相似度:
                 continue
-            返回列表.append([(结果[0][0][0].item(), 结果[0][0][1].item(), 结果[0][2][0].item(), 结果[0][2][1].item()), 结果[1], round(结果[2].item(), 2)])
-        return 返回列表
+            if 文本 in 结果[1]:
+                返回值.状态 = True
+                返回值.位置 = (int((结果[0][0][0] + 结果[0][2][0]) / 2), int((结果[0][0][1] + 结果[0][2][1]) / 2))
+                返回值.最高相似度 = round(结果[2], 3)
+
+        return 返回值
 
     @staticmethod
     def 识别测试(图片: np.ndarray, 语种: str = 'ch_sim'):
@@ -122,7 +134,8 @@ class 简单光学字符识别类:
         返回列表 = []
         for 结果 in 结果列表:
             # item()是为了将numpy的数据读取出来成为常规的python数据格式，便于fastapi返回。
-            返回列表.append([(int(结果[0][0][0]), int(结果[0][0][1]), int(结果[0][2][0]), int(结果[0][2][1])), 结果[1], round(结果[2], 2)])
+            返回列表.append([(int(结果[0][0][0]), int(结果[0][0][1]), int(结果[0][2][0]), int(结果[0][2][1])), 结果[1],
+                             round(结果[2], 2)])
 
         图片 = Image.fromarray(图片)
         # 绘制边框

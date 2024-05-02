@@ -126,7 +126,7 @@ $ uvicorn 接入口:快捷应用程序接口 --reload --port 8888
 ## 赞助
 <p align="center">
     <img src="./资源存放屋/微信赞赏码.jpg" alt="微信赞赏码" style="border-radius:50%" />
-</p>  
+</p>   
 
 ## 许可证
 

@@ -64,6 +64,15 @@ class 你只看一次数据类(BaseModel):
     置信度: float
 
 
+class 简单光学字符识别数据类(BaseModel):
+    序号: int | None = None
+    图片名: str
+    文本: str
+    范围: str
+    语种: int
+    最低相似度: float
+
+
 class 多图匹配数据类(BaseModel):
     序号: int | None = None
     图片名: str
